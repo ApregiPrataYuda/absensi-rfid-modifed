@@ -52,8 +52,8 @@
                     <tr>
                         <th class="p-3 text-center w-12">No</th>
                         <th class="p-3">Tanggal</th>
-                        <th id="th-izin-siswa" class="p-3">Siswa</th>
-                        <th id="th-izin-kelas" class="p-3 hidden md:table-cell">Kelas</th>
+                        <th id="th-izin-siswa" class="p-3">Karyawan</th>
+                        <th id="th-izin-kelas" class="p-3 hidden md:table-cell">Gedung</th>
                         <th class="p-3">Jenis</th>
                         <th class="p-3 hidden lg:table-cell">Alasan</th>
                         <th class="p-3">Status</th>
