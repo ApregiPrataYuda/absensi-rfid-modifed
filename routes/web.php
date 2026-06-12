@@ -67,7 +67,7 @@ Route::middleware('auth')->group(function () {
         });
 
     Route::middleware('permission:kelas.manage')->group(function () {
-        Route::get('/kelola-kelas', [KelolaKelasController::class, 'index'])->name('kelola-kelas');
+        Route::get('/kelola-gedung', [KelolaKelasController::class, 'index'])->name('kelola-kelas');
         Route::get('/kelola-kelas/data', [KelolaKelasController::class, 'data'])->name('kelola-kelas.data');
         Route::post('/kelola-kelas', [KelolaKelasController::class, 'store'])->name('kelola-kelas.store');
         Route::put('/kelola-kelas/{kelas}', [KelolaKelasController::class, 'update'])->name('kelola-kelas.update');
