@@ -182,15 +182,15 @@
             const desc = document.getElementById('izin-sakit-description');
             if (desc) {
                 desc.textContent = isStudent
-                    ? 'Silakan ajukan izin/sakit Anda sesuai kebutuhan. Pengajuan akan diproses setelah persetujuan guru atau wali kelas.'
-                    : 'Silakan kelola pengajuan izin/sakit siswa sesuai alur persetujuan sekolah.';
+                    ? 'Silakan ajukan izin/sakit Anda sesuai kebutuhan. Pengajuan akan diproses setelah persetujuan mandor.'
+                    : 'Silakan kelola pengajuan izin/sakit karyawan sesuai alur persetujuan perusahaan.';
             }
 
             const searchInput = document.getElementById('filter-izin-search');
             if (searchInput) {
                 searchInput.placeholder = isStudent
                     ? 'Cari jenis/status/alasan...'
-                    : 'Cari siswa/alasan...';
+                    : 'Cari karyawan/alasan...';
             }
 
             const thSiswa = document.getElementById('th-izin-siswa');
@@ -627,10 +627,10 @@
                             <div>
                                 <input type="hidden" id="izin-siswa-id" value="">
                                 ${hideSiswaField ? '' : siswaLocked ? `
-                                    <label class="${labelClass}">Siswa</label>
+                                    <label class="${labelClass}">Karyawan</label>
                                     <div id="izin-siswa-locked-text" class="w-full bg-gray-50 border border-gray-200 text-sm rounded-lg p-2.5 text-gray-700">-</div>
                                 ` : `
-                                    <label class="${labelClass}">Siswa</label>
+                                    <label class="${labelClass}">Karyawan</label>
                                     <div class="relative">
                                         <input id="izin-siswa-search" type="text" class="${inputClass}" placeholder="Ketik nama/NISN/kelas siswa" autocomplete="off">
                                         <div id="izin-siswa-dropdown" class="hidden absolute top-full left-0 right-0 mt-1 max-h-60 overflow-y-auto bg-white border border-gray-200 rounded-lg shadow-lg z-20"></div>
