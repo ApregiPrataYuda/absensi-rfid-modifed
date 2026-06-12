@@ -54,35 +54,40 @@
 
                   @if (auth()->user()?->can('siswa.view') || auth()->user()?->can('guru.view') || auth()->user()?->can('piket.view') || auth()->user()?->can('settings.users.manage'))
                       <details data-user-management {{ request()->routeIs('data-siswa') || request()->routeIs('data-guru') || request()->routeIs('data-piket') || request()->routeIs('role-permission.users.*') ? 'open' : '' }}>
-                          <summary class="list-none flex items-center gap-3 px-3 py-2.5 rounded-lg transition text-gray-300 hover:bg-white/10 hover:text-white cursor-pointer">
+                          
+                        <summary class="list-none flex items-center gap-3 px-3 py-2.5 rounded-lg transition text-gray-300 hover:bg-white/10 hover:text-white cursor-pointer">
                               <i class="fas fa-users w-4 text-center"></i>
                               <span class="sidebar-label text-[15px] font-semibold flex-1">Kelola Member</span>
                               <i class="fas fa-chevron-right settings-chevron sidebar-label text-[11px] opacity-80"></i>
                           </summary>
                           <div class="mt-2 pl-2 space-y-2">
+
                               @can('siswa.view')
                                   <a href="{{ route('data-siswa') }}" class="flex items-center gap-2 px-3 py-2 rounded-lg transition {{ request()->routeIs('data-siswa') ? 'bg-white/15 text-white' : 'text-gray-300 hover:bg-white/10 hover:text-white' }}">
                                       <i class="fas fa-person-digging w-4 text-center"></i>
                                       <span class="sidebar-label text-[14px] font-medium">Data Karyawan</span>
                                   </a>
                               @endcan
+
                               @can('guru.view')
                                   <a href="{{ route('data-guru') }}" class="flex items-center gap-2 px-3 py-2 rounded-lg transition {{ request()->routeIs('data-guru') ? 'bg-white/15 text-white' : 'text-gray-300 hover:bg-white/10 hover:text-white' }}">
                                       <i class="fas fa-helmet-safety w-4 text-center"></i>
                                       <span class="sidebar-label text-[14px] font-medium">Data Mandor</span>
                                   </a>
                               @endcan
+
                               @can('piket.view')
                                   {{-- <a href="{{ route('data-piket') }}" class="flex items-center gap-2 px-3 py-2 rounded-lg transition {{ request()->routeIs('data-piket') ? 'bg-white/15 text-white' : 'text-gray-300 hover:bg-white/10 hover:text-white' }}">
                                       <i class="fas fa-user-clock w-4 text-center"></i>
                                       <span class="sidebar-label text-[14px] font-medium">Data Piket</span>
                                   </a> --}}
-                                <div class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400 italic">
+
+                                {{-- <div class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400 italic">
                                     <i class="fas fa-circle-info w-4 text-center"></i>
                                     <span class="sidebar-label text-[15px]">
                                         (Data Piket) Menu Ini Dinonaktifkan
                                     </span>
-                                </div>
+                                </div> --}}
                               @endcan
                               @can('settings.users.manage')
                                   <a href="{{ route('role-permission.users.index') }}" class="flex items-center gap-2 px-3 py-2 rounded-lg transition {{ request()->routeIs('role-permission.users.*') ? 'bg-white/15 text-white' : 'text-gray-300 hover:bg-white/10 hover:text-white' }}">
@@ -113,12 +118,13 @@
                                       <i class="fas fa-level-up-alt w-4 text-center"></i>
                                       <span class="sidebar-label text-[14px] font-medium">Kenaikan Kelas</span>
                                   </a> --}}
-                                  <div class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400 italic">
+
+                                {{-- <div class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400 italic">
                                     <i class="fas fa-circle-info w-4 text-center"></i>
                                     <span class="sidebar-label text-[15px]">
                                         (Kenaikan Kelas) Menu Ini Dinonaktifkan
                                     </span>
-                                </div>
+                                </div> --}}
                               @endcan
                           </div>
                       </details>
@@ -153,12 +159,12 @@
                           </div>
                       </details> --}}
 
-                       <div class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400 italic">
+                    {{-- <div class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400 italic">
                         <i class="fas fa-circle-info w-4 text-center"></i>
                         <span class="sidebar-label text-[15px]">
                             (Pembelajaran) Menu Ini Dinonaktifkan
                         </span>
-                    </div>
+                    </div> --}}
                   @endif
                   @if (auth()->user()?->can('poin-pelanggaran.view') || auth()->user()?->can('poin-pelanggaran.manage'))
                       <details data-pelanggaran-siswa {{ request()->routeIs('poin-pelanggaran.*') ? 'open' : '' }}>
@@ -208,24 +214,26 @@
                               </a>
                           </div>
                       </details> --}}
-                    <div class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400 italic">
+
+                    {{-- <div class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400 italic">
                         <i class="fas fa-circle-info w-4 text-center"></i>
                         <span class="sidebar-label text-[15px]">
                             (Tabungan Siswa) Menu Ini Dinonaktifkan
                         </span>
-                    </div>
+                    </div> --}}
+
                   @endif
                   @can('absen.manage')
                       {{-- <a href="{{ route('kelola-absen') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition {{ request()->routeIs('kelola-absen') ? 'bg-white/15 text-white' : 'text-gray-300 hover:bg-white/10 hover:text-white' }}">
                           <i class="fas fa-calendar-times w-4 text-center"></i>
                           <span class="sidebar-label text-[15px] font-semibold">Jadwal Libur</span>
                       </a> --}}
-                    <div class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400 italic">
+                    {{-- <div class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400 italic">
                         <i class="fas fa-circle-info w-4 text-center"></i>
                         <span class="sidebar-label text-[15px]">
                             (Jadwal Libur) Menu Ini Dinonaktifkan
                         </span>
-                    </div>
+                    </div> --}}
                   @endcan
 
                   @can('kartu-absensi.manage')
@@ -240,12 +248,13 @@
                           <i class="fas fa-paper-plane w-4 text-center"></i>
                           <span class="sidebar-label text-[15px] font-semibold">Kirim Notifikasi</span>
                       </a> --}}
-                      <div class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400 italic">
+
+                    {{-- <div class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400 italic">
                         <i class="fas fa-circle-info w-4 text-center"></i>
                         <span class="sidebar-label text-[15px]">
                             (Kirim Notifikasi) Menu Ini Dinonaktifkan
                         </span>
-                    </div>
+                    </div> --}}
                   @endcan
 
                   @can('arsip.manage')
@@ -255,12 +264,12 @@
                           <span class="sidebar-label text-[15px] font-semibold">Daftar Arsip</span>
                       </a> --}}
 
-                    <div class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400 italic">
+                    {{-- <div class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400 italic">
                         <i class="fas fa-circle-info w-4 text-center"></i>
                         <span class="sidebar-label text-[15px]">
                             (Daftar Arsip) Menu Ini Dinonaktifkan
                         </span>
-                    </div>
+                    </div> --}}
                   @endcan
 
                   @if (auth()->user()?->hasRole('siswa') && auth()->user()?->can('kartu-siswa.view'))
@@ -307,12 +316,13 @@
                                       <i class="fas fa-book-reader w-4 text-center"></i>
                                       <span class="sidebar-label text-[14px] font-medium">Absensi Pelajaran</span>
                                   </a> --}}
-                                  <div class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400 italic">
+
+                                {{-- <div class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400 italic">
                                     <i class="fas fa-circle-info w-4 text-center"></i>
                                     <span class="sidebar-label text-[15px]">
                                         (Absensi Pelajaran) Menu Ini Dinonaktifkan
                                     </span>
-                                </div>
+                                </div> --}}
                               @endcan
                               @can('rekap-bulanan.view')
                                   <a href="{{ route('rekap-bulanan') }}" class="flex items-center gap-2 px-3 py-2 rounded-lg transition {{ request()->routeIs('rekap-bulanan') ? 'bg-white/15 text-white' : 'text-gray-300 hover:bg-white/10 hover:text-white' }}">
@@ -356,12 +366,12 @@
                                       <span class="sidebar-label text-[14px] font-medium">Notifikasi</span>
                                   </a> --}}
 
-                                <div class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400 italic">
+                                {{-- <div class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400 italic">
                                     <i class="fas fa-circle-info w-4 text-center"></i>
                                     <span class="sidebar-label text-[15px]">
                                         (Notifikasi) Menu Ini Dinonaktifkan
                                     </span>
-                                </div>
+                                </div> --}}
                               @endcan
                               @can('settings.backup.manage')
                                   <a href="{{ route('settings.backup.index') }}" class="flex items-center gap-2 px-3 py-2 rounded-lg transition {{ request()->routeIs('settings.backup.*') ? 'bg-white/15 text-white' : 'text-gray-300 hover:bg-white/10 hover:text-white' }}">
