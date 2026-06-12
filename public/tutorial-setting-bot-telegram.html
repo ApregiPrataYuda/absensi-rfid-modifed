@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial Setting Bot Telegram Absensindo</title>
+    <style>
+        :root {
+            --bg: #f4f1eb;
+            --panel: #ffffff;
+            --panel-soft: #faf8f4;
+            --line: #ddd6cb;
+            --line-strong: #c9c0b3;
+            --text: #2b2b2b;
+            --muted: #6b675f;
+            --heading: #1f1f1f;
+            --brand: #275f52;
+            --brand-soft: #ecf3f0;
+            --warn: #7a4f16;
+            --warn-soft: #f8ecd6;
+            --ok: #2f5d36;
+            --ok-soft: #eaf4e8;
+            --shadow: 0 10px 30px rgba(41, 37, 31, 0.06);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Trebuchet MS", "Segoe UI", Tahoma, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.65;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        .wrap {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 28px 20px 52px;
+        }
+
+        .topbar {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 18px;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .topbar span {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .hero {
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: 26px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .hero-head {
+            padding: 26px 28px 18px;
+            border-bottom: 1px solid var(--line);
+            background: var(--panel-soft);
+        }
+
+        .eyebrow {
+            display: inline-block;
+            padding: 6px 10px;
+            border: 1px solid var(--line-strong);
+            border-radius: 999px;
+            background: #fff;
+            color: var(--muted);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+        }
+
+        .hero h1 {
+            margin: 14px 0 10px;
+            color: var(--heading);
+            font-size: 34px;
+            line-height: 1.15;
+        }
+
+        .hero p {
+            margin: 0;
+            max-width: 840px;
+            color: var(--muted);
+            font-size: 16px;
+        }
+
+        .hero-foot {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 0;
+        }
+
+        .hero-metric {
+            padding: 18px 20px;
+            border-right: 1px solid var(--line);
+        }
+
+        .hero-metric:last-child {
+            border-right: 0;
+        }
+
+        .hero-metric strong {
+            display: block;
+            color: var(--heading);
+            font-size: 18px;
+            margin-bottom: 4px;
+        }
+
+        .hero-metric span {
+            display: block;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .layout {
+            display: grid;
+            grid-template-columns: 300px minmax(0, 1fr);
+            gap: 22px;
+            margin-top: 22px;
+            align-items: start;
+        }
+
+        .sidebar {
+            position: sticky;
+            top: 18px;
+            display: grid;
+            gap: 16px;
+        }
+
+        .panel {
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: 22px;
+            box-shadow: var(--shadow);
+        }
+
+        .panel-body {
+            padding: 18px 18px 20px;
+        }
+
+        .panel h2,
+        .panel h3,
+        .section h2,
+        .step h3 {
+            margin: 0 0 10px;
+            color: var(--heading);
+        }
+
+        .panel p,
+        .section p,
+        .step p {
+            margin: 0;
+            color: var(--muted);
+        }
+
+        .toc {
+            list-style: none;
+            padding: 0;
+            margin: 12px 0 0;
+        }
+
+        .toc li + li {
+            margin-top: 8px;
+        }
+
+        .toc a {
+            display: block;
+            padding: 10px 12px;
+            text-decoration: none;
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            background: #fff;
+            color: var(--text);
+            font-size: 14px;
+        }
+
+        .toc a:hover {
+            border-color: var(--line-strong);
+            background: var(--panel-soft);
+        }
+
+        .mini-list {
+            margin: 12px 0 0;
+            padding-left: 18px;
+            color: var(--text);
+        }
+
+        .mini-list li + li {
+            margin-top: 8px;
+        }
+
+        .content {
+            display: grid;
+            gap: 18px;
+        }
+
+        .section {
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: 24px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .section-head {
+            padding: 18px 22px;
+            border-bottom: 1px solid var(--line);
+            background: var(--panel-soft);
+        }
+
+        .section-head h2 {
+            font-size: 24px;
+            margin-bottom: 6px;
+        }
+
+        .section-body {
+            padding: 22px;
+        }
+
+        .quick-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .quick-card {
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            padding: 16px;
+            background: #fff;
+        }
+
+        .quick-card h3 {
+            margin: 0 0 8px;
+            font-size: 18px;
+        }
+
+        .quick-card ul {
+            margin: 0;
+            padding-left: 18px;
+        }
+
+        .quick-card li + li {
+            margin-top: 7px;
+        }
+
+        .steps {
+            display: grid;
+            gap: 16px;
+        }
+
+        .step {
+            border: 1px solid var(--line);
+            border-radius: 20px;
+            background: #fff;
+            padding: 18px;
+        }
+
+        .step-head {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            margin-bottom: 10px;
+        }
+
+        .step-no {
+            width: 40px;
+            height: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex: 0 0 auto;
+            border-radius: 12px;
+            background: var(--brand-soft);
+            color: var(--brand);
+            font-weight: 800;
+            font-size: 16px;
+            border: 1px solid #cfe0da;
+        }
+
+        .step h3 {
+            font-size: 20px;
+        }
+
+        .step ol,
+        .step ul,
+        .faq ul {
+            margin: 12px 0 0;
+            padding-left: 20px;
+        }
+
+        .step li + li,
+        .faq li + li {
+            margin-top: 8px;
+        }
+
+        code {
+            font-family: Consolas, "Courier New", monospace;
+            background: #f2f1ee;
+            border: 1px solid #e2ddd4;
+            border-radius: 8px;
+            padding: 2px 6px;
+            color: #384555;
+            font-size: 0.95em;
+        }
+
+        .snippet {
+            margin-top: 14px;
+            background: #faf8f4;
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            padding: 14px 16px;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            font-family: Consolas, "Courier New", monospace;
+            font-size: 14px;
+            color: #24313d;
+        }
+
+        .callout {
+            margin-top: 14px;
+            border-radius: 18px;
+            padding: 14px 16px;
+            border: 1px solid var(--line);
+            background: var(--panel-soft);
+        }
+
+        .callout.warn {
+            background: var(--warn-soft);
+            border-color: #e4c38f;
+        }
+
+        .callout.ok {
+            background: var(--ok-soft);
+            border-color: #bfd8bf;
+        }
+
+        .callout strong {
+            display: block;
+            margin-bottom: 6px;
+            color: var(--heading);
+        }
+
+        .strip {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px;
+            margin-top: 14px;
+        }
+
+        .strip-box {
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            padding: 14px;
+            background: #fff;
+        }
+
+        .strip-box strong {
+            display: block;
+            margin-bottom: 6px;
+            color: var(--heading);
+            font-size: 15px;
+        }
+
+        .faq {
+            display: grid;
+            gap: 12px;
+        }
+
+        .faq-item {
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            padding: 16px;
+            background: #fff;
+        }
+
+        .faq-item h3 {
+            margin: 0 0 8px;
+            font-size: 17px;
+            color: var(--heading);
+        }
+
+        .footer {
+            margin-top: 24px;
+            padding: 16px 18px;
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            background: var(--panel);
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        @media (max-width: 960px) {
+            .layout {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                position: static;
+            }
+
+            .hero-foot {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 640px) {
+            .wrap {
+                padding: 18px 14px 34px;
+            }
+
+            .hero-head,
+            .section-head,
+            .section-body,
+            .panel-body {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            .hero-foot,
+            .quick-grid,
+            .strip {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <div class="topbar">
+            <span>Dokumen panduan admin sekolah</span>
+            <span>Telegram Bot Setup untuk notifikasi absensi siswa</span>
+        </div>
+
+        <section class="hero">
+            <div class="hero-head">
+                <div class="eyebrow">Tutorial Telegram</div>
+                <h1>Cara Menghubungkan Bot Telegram ke Sistem Absensi</h1>
+                <p>
+                    Panduan ini dibuat untuk admin sekolah. Alurnya dimulai dari membuat bot lewat
+                    <code>@BotFather</code>, menyimpan token ke pengaturan aplikasi, sampai memberi instruksi ke siswa
+                    agar mereka menghubungkan akun Telegram masing-masing dengan <code>/start NISN</code>.
+                </p>
+            </div>
+            <div class="hero-foot">
+                <div class="hero-metric">
+                    <strong>7 langkah utama</strong>
+                    <span>Dari pembuatan bot sampai siswa terhubung</span>
+                </div>
+                <div class="hero-metric">
+                    <strong>Webhook otomatis</strong>
+                    <span>Diset saat token Telegram disimpan</span>
+                </div>
+                <div class="hero-metric">
+                    <strong>Butuh HTTPS</strong>
+                    <span>Agar Telegram bisa mengakses webhook aplikasi</span>
+                </div>
+                <div class="hero-metric">
+                    <strong>Siswa wajib start</strong>
+                    <span>Chat pribadi bot dengan format <code>/start NISN</code></span>
+                </div>
+            </div>
+        </section>
+
+        <div class="layout">
+            <aside class="sidebar">
+                <section class="panel">
+                    <div class="panel-body">
+                        <h2>Isi Panduan</h2>
+                        <ul class="toc">
+                            <li><a href="#ringkasan">Ringkasan Awal</a></li>
+                            <li><a href="#langkah">Langkah Setting</a></li>
+                            <li><a href="#perintah-bot">Perintah Bot</a></li>
+                            <li><a href="#instruksi-siswa">Instruksi untuk Siswa</a></li>
+                            <li><a href="#contoh-pesan">Contoh Pesan ke Siswa</a></li>
+                            <li><a href="#cek-hasil">Cara Cek Hasil</a></li>
+                            <li><a href="#faq">Pertanyaan Umum</a></li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section class="panel">
+                    <div class="panel-body">
+                        <h2>Siapkan Dulu</h2>
+                        <ul class="mini-list">
+                            <li>Akun Telegram admin sekolah.</li>
+                            <li>Data siswa dan NISN yang sudah benar.</li>
+                            <li>Aplikasi sudah online dan memakai <code>HTTPS</code>.</li>
+                            <li>Akses ke menu <code>Pengaturan Notifikasi</code>.</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section class="panel">
+                    <div class="panel-body">
+                        <h2>Target Akhir</h2>
+                        <ul class="mini-list">
+                            <li>Bot Telegram aktif dan valid.</li>
+                            <li>Webhook berhasil dipasang ke aplikasi.</li>
+                            <li>Siswa menghubungkan akun Telegram dengan NISN.</li>
+                            <li>Notifikasi absensi terkirim ke Telegram.</li>
+                        </ul>
+                    </div>
+                </section>
+            </aside>
+
+            <main class="content">
+                <section id="ringkasan" class="section">
+                    <div class="section-head">
+                        <h2>Ringkasan Awal</h2>
+                        <p>Kalau ingin melihat gambaran cepat sebelum mulai, bagian ini cukup untuk memahami alurnya.</p>
+                    </div>
+                    <div class="section-body">
+                        <div class="quick-grid">
+                            <div class="quick-card">
+                                <h3>1. Buat Bot</h3>
+                                <ul>
+                                    <li>Buat bot melalui <code>@BotFather</code>.</li>
+                                    <li>Simpan token yang diberikan Telegram.</li>
+                                </ul>
+                            </div>
+                            <div class="quick-card">
+                                <h3>2. Simpan Token</h3>
+                                <ul>
+                                    <li>Masuk ke pengaturan Telegram di aplikasi.</li>
+                                    <li>Tempel token lalu simpan.</li>
+                                </ul>
+                            </div>
+                            <div class="quick-card">
+                                <h3>3. Webhook Aktif</h3>
+                                <ul>
+                                    <li>Sistem akan validasi bot.</li>
+                                    <li>Webhook dipasang otomatis jika server sudah online.</li>
+                                </ul>
+                            </div>
+                            <div class="quick-card">
+                                <h3>4. Siswa Start</h3>
+                                <ul>
+                                    <li>Siswa chat pribadi ke bot.</li>
+                                    <li>Kirim perintah <code>/start NISN</code>.</li>
+                                    <li>Jika satu akun Telegram dipakai untuk beberapa anak, ulangi untuk setiap NISN.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="callout warn">
+                            <strong>Hal penting sebelum mulai</strong>
+                            Jika aplikasi masih berjalan di localhost atau belum memakai HTTPS, Telegram tidak akan bisa
+                            mengakses webhook. Dalam kondisi itu token bisa saja tersimpan, tetapi status webhook belum
+                            akan normal.
+                        </div>
+                    </div>
+                </section>
+
+                <section id="langkah" class="section">
+                    <div class="section-head">
+                        <h2>Langkah Setting</h2>
+                        <p>Ikuti urutan di bawah ini dari awal. Jangan lompat ke langkah siswa sebelum token bot tersimpan dengan benar.</p>
+                    </div>
+                    <div class="section-body">
+                        <div class="steps">
+                            <article class="step">
+                                <div class="step-head">
+                                    <div class="step-no">1</div>
+                                    <div>
+                                        <h3>Buat bot baru di BotFather</h3>
+                                        <p>BotFather adalah akun resmi Telegram untuk membuat bot baru.</p>
+                                    </div>
+                                </div>
+                                <ol>
+                                    <li>Buka Telegram lalu cari akun <code>@BotFather</code>.</li>
+                                    <li>Kirim <code>/start</code>.</li>
+                                    <li>Kirim <code>/newbot</code>.</li>
+                                    <li>Masukkan nama bot, misalnya <code>Absensi SMP Harapan</code>.</li>
+                                    <li>Masukkan username bot yang diakhiri <code>bot</code>, misalnya <code>absensi_smp_harapan_bot</code>.</li>
+                                    <li>BotFather akan mengirim <code>bot token</code>. Simpan token ini.</li>
+                                </ol>
+                                <div class="snippet">Contoh token
+1234567890:AAExampleTokenDariBotFather123456789</div>
+                            </article>
+
+                            <article class="step">
+                                <div class="step-head">
+                                    <div class="step-no">2</div>
+                                    <div>
+                                        <h3>Masukkan token bot ke aplikasi</h3>
+                                        <p>Langkah ini dilakukan dari dashboard admin sekolah.</p>
+                                    </div>
+                                </div>
+                                <ol>
+                                    <li>Login ke dashboard aplikasi.</li>
+                                    <li>Buka menu <code>Pengaturan Notifikasi</code>.</li>
+                                    <li>Masuk ke tab <code>Konfigurasi Notifikasi</code>.</li>
+                                    <li>Pilih sub-tab <code>Konfigurasi Telegram</code>.</li>
+                                    <li>Tempel token ke kolom <code>Bot Token</code>.</li>
+                                    <li>Klik <code>Simpan Pengaturan</code>.</li>
+                                </ol>
+                            </article>
+
+                            <article class="step">
+                                <div class="step-head">
+                                    <div class="step-no">3</div>
+                                    <div>
+                                        <h3>Biarkan sistem memvalidasi bot dan memasang webhook</h3>
+                                        <p>Setelah disimpan, sistem akan bekerja otomatis.</p>
+                                    </div>
+                                </div>
+                                <ul>
+                                    <li>Memeriksa apakah token valid.</li>
+                                    <li>Mengambil <code>Bot ID</code> dan <code>Username Bot</code>.</li>
+                                    <li>Menyinkronkan daftar command bot ke menu Telegram.</li>
+                                    <li>Memasang webhook Telegram ke aplikasi.</li>
+                                    <li>Memperbarui <code>Webhook Status</code> di halaman pengaturan.</li>
+                                </ul>
+                                <div class="strip">
+                                    <div class="strip-box">
+                                        <strong>Jika token benar</strong>
+                                        Bot ID dan username akan terisi otomatis.
+                                    </div>
+                                    <div class="strip-box">
+                                        <strong>Jika server online</strong>
+                                        Webhook bisa langsung aktif.
+                                    </div>
+                                    <div class="strip-box">
+                                        <strong>Jika ada masalah</strong>
+                                        Cek status dan kolom error terakhir.
+                                    </div>
+                                </div>
+                            </article>
+
+                            <article class="step">
+                                <div class="step-head">
+                                    <div class="step-no">4</div>
+                                    <div>
+                                        <h3>Aktifkan channel notifikasi Telegram</h3>
+                                        <p>Bot sudah aktif saja belum cukup. Channel Telegram juga harus dipilih di pengaturan notifikasi.</p>
+                                    </div>
+                                </div>
+                                <ol>
+                                    <li>Pada kartu <code>Notifikasi Absensi</code>, aktifkan toggle notifikasi.</li>
+                                    <li>Pilih <code>Telegram</code> atau <code>WhatsApp + Telegram</code> di dropdown <code>Kirim via</code>.</li>
+                                    <li>Jika diperlukan, sesuaikan template pesan pada tab <code>Template Pesan</code>.</li>
+                                </ol>
+                            </article>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="perintah-bot" class="section">
+                    <div class="section-head">
+                        <h2>Perintah Bot</h2>
+                        <p>Setelah bot aktif, akun Telegram pengguna bisa menjalankan beberapa perintah berikut di chat pribadi bot.</p>
+                    </div>
+                    <div class="section-body">
+                        <div class="quick-grid">
+                            <div class="quick-card">
+                                <h3>/start NISN</h3>
+                                <ul>
+                                    <li>Untuk menautkan akun Telegram ke data siswa.</li>
+                                    <li>Bisa juga dipakai dari deep link Telegram sekolah.</li>
+                                </ul>
+                            </div>
+                            <div class="quick-card">
+                                <h3>/cek</h3>
+                                <ul>
+                                    <li>Menampilkan daftar siswa yang tertaut ke akun Telegram ini.</li>
+                                    <li>Berguna untuk orang tua dengan lebih dari satu anak.</li>
+                                </ul>
+                            </div>
+                            <div class="quick-card">
+                                <h3>/profil NISN</h3>
+                                <ul>
+                                    <li>Menampilkan profil siswa yang tertaut ke akun Telegram ini.</li>
+                                    <li>Contoh: <code>/profil 2432500012</code>.</li>
+                                </ul>
+                            </div>
+                            <div class="quick-card">
+                                <h3>/absensi NISN</h3>
+                                <ul>
+                                    <li>Menampilkan absensi terakhir siswa yang tertaut.</li>
+                                    <li>Contoh: <code>/absensi 2432500012</code>.</li>
+                                </ul>
+                            </div>
+                            <div class="quick-card">
+                                <h3>/izin NISN</h3>
+                                <ul>
+                                    <li>Menampilkan data izin atau sakit terakhir siswa yang tertaut.</li>
+                                    <li>Contoh: <code>/izin 2432500012</code>.</li>
+                                </ul>
+                            </div>
+                            <div class="quick-card">
+                                <h3>/hapus NISN</h3>
+                                <ul>
+                                    <li>Untuk melepas satu tautan siswa tertentu.</li>
+                                    <li>Contoh: <code>/hapus 2432500012</code>.</li>
+                                </ul>
+                            </div>
+                            <div class="quick-card">
+                                <h3>/hapussemua</h3>
+                                <ul>
+                                    <li>Untuk melepas semua siswa dari akun Telegram ini.</li>
+                                    <li>Dipakai jika ingin reset semua tautan.</li>
+                                </ul>
+                            </div>
+                            <div class="quick-card">
+                                <h3>/menu</h3>
+                                <ul>
+                                    <li>Menampilkan panduan command kembali.</li>
+                                    <li>Juga akan muncul otomatis jika user mengetik keyword yang salah.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="instruksi-siswa" class="section">
+                    <div class="section-head">
+                        <h2>Instruksi untuk Siswa</h2>
+                        <p>Bagian ini penting. Telegram tidak bisa mengirim ke siswa kalau siswa belum menghubungkan chat mereka ke sistem.</p>
+                    </div>
+                    <div class="section-body">
+                        <div class="steps">
+                            <article class="step">
+                                <div class="step-head">
+                                    <div class="step-no">5</div>
+                                    <div>
+                                        <h3>Siswa wajib chat pribadi ke bot</h3>
+                                        <p>Instruksi ini bisa dibagikan lewat wali kelas, grup sekolah, atau pengumuman internal.</p>
+                                    </div>
+                                </div>
+                                <ol>
+                                    <li>Siswa buka bot Telegram sekolah.</li>
+                                    <li>Siswa menekan tombol <code>Start</code>.</li>
+                                    <li>Siswa kirim perintah dengan format:</li>
+                                </ol>
+                                <div class="snippet">/start NISN</div>
+                                <p style="margin-top:12px;">Contoh untuk siswa:</p>
+                                <div class="snippet">/start 2432500012</div>
+                                <div class="callout ok">
+                                    <strong>Setelah langkah ini berhasil</strong>
+                                    Sistem akan menyimpan hubungan antara data siswa di database dengan chat Telegram siswa
+                                    tersebut. Setelah itu siswa baru bisa menerima notifikasi dari bot.
+                                </div>
+                                <div class="callout">
+                                    <strong>Jika satu akun Telegram dipakai untuk beberapa siswa</strong>
+                                    Kirim ulang perintah <code>/start NISN</code> untuk setiap siswa yang ingin ditautkan.
+                                    Misalnya orang tua dengan dua anak dapat mengirim <code>/start 2432500012</code> lalu
+                                    <code>/start 2432500099</code> dari akun Telegram yang sama.
+                                </div>
+                            </article>
+
+                            <article class="step">
+                                <div class="step-head">
+                                    <div class="step-no">6</div>
+                                    <div>
+                                        <h3>Aturan yang perlu disampaikan ke siswa</h3>
+                                        <p>Supaya tidak banyak gagal hubung, sampaikan poin-poin ini secara jelas.</p>
+                                    </div>
+                                </div>
+                                <ul>
+                                    <li>NISN yang dikirim harus benar dan sesuai data sekolah.</li>
+                                    <li>Perintah harus dikirim di chat pribadi bot, bukan di grup Telegram.</li>
+                                    <li>Jika salah NISN, siswa harus mengulangi dengan data yang benar.</li>
+                                    <li>Jika bot sekolah diganti, siswa perlu melakukan <code>/start NISN</code> lagi ke bot baru.</li>
+                                </ul>
+                            </article>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="contoh-pesan" class="section">
+                    <div class="section-head">
+                        <h2>Contoh Pesan yang Bisa Dibagikan ke Siswa</h2>
+                        <p>Bagian ini bisa langsung disalin oleh admin sekolah atau wali kelas.</p>
+                    </div>
+                    <div class="section-body">
+                        <div class="snippet">Silakan hubungkan akun Telegram Anda ke sistem absensi sekolah.
+
+Langkah:
+1. Buka bot Telegram sekolah.
+2. Tekan Start.
+3. Kirim perintah dengan format: /start NISN
+
+Contoh:
+/start 2432500012
+
+Gunakan NISN Anda sendiri. Setelah berhasil, notifikasi absensi akan masuk ke Telegram Anda.</div>
+                    </div>
+                </section>
+
+                <section id="cek-hasil" class="section">
+                    <div class="section-head">
+                        <h2>Cara Cek Hasil Setting</h2>
+                        <p>Gunakan daftar berikut untuk memastikan proses sudah selesai dengan benar.</p>
+                    </div>
+                    <div class="section-body">
+                        <div class="quick-grid">
+                            <div class="quick-card">
+                                <h3>Di pengaturan Telegram</h3>
+                                <ul>
+                                    <li><code>Bot ID</code> terisi.</li>
+                                    <li><code>Username Bot</code> terisi.</li>
+                                    <li><code>Webhook Status</code> menunjukkan status aktif atau normal.</li>
+                                </ul>
+                            </div>
+                            <div class="quick-card">
+                                <h3>Di data koneksi siswa</h3>
+                                <ul>
+                                    <li>Jumlah siswa terhubung bertambah.</li>
+                                    <li>Siswa yang sudah <code>/start NISN</code> bisa ditemukan di data link Telegram.</li>
+                                </ul>
+                            </div>
+                            <div class="quick-card">
+                                <h3>Saat uji kirim</h3>
+                                <ul>
+                                    <li>Lakukan absensi uji pada satu siswa yang sudah terhubung.</li>
+                                    <li>Pastikan pesan masuk ke Telegram siswa tersebut.</li>
+                                </ul>
+                            </div>
+                            <div class="quick-card">
+                                <h3>Jika gagal</h3>
+                                <ul>
+                                    <li>Cek token bot.</li>
+                                    <li>Cek status webhook.</li>
+                                    <li>Cek apakah siswa sudah benar-benar kirim <code>/start NISN</code>.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="callout warn">
+                            <strong>Jika bot Telegram diganti</strong>
+                            Siswa lama biasanya perlu menghubungkan ulang ke bot baru. Jadi setelah pergantian bot,
+                            kirim ulang instruksi <code>/start NISN</code> ke siswa.
+                        </div>
+                    </div>
+                </section>
+
+                <section id="faq" class="section">
+                    <div class="section-head">
+                        <h2>Pertanyaan Umum</h2>
+                        <p>Bagian ini untuk membantu admin saat ada pertanyaan dari operator atau wali kelas.</p>
+                    </div>
+                    <div class="section-body">
+                        <div class="faq">
+                            <div class="faq-item">
+                                <h3>Apakah webhook harus manual diset di Telegram?</h3>
+                                <p>Tidak. Di sistem ini webhook akan dicoba set otomatis saat token bot disimpan.</p>
+                            </div>
+                            <div class="faq-item">
+                                <h3>Kenapa bot valid tapi siswa belum menerima notifikasi?</h3>
+                                <p>Biasanya karena siswa belum melakukan <code>/start NISN</code>, atau chat tersebut belum tersimpan ke sistem.</p>
+                            </div>
+                            <div class="faq-item">
+                                <h3>Apakah siswa bisa kirim /start tanpa NISN?</h3>
+                                <p>Bisa, tetapi sistem tidak akan bisa menghubungkannya ke data siswa yang benar. Format yang harus dipakai adalah <code>/start NISN</code>.</p>
+                            </div>
+                            <div class="faq-item">
+                                <h3>Apakah satu akun Telegram bisa dipakai untuk beberapa siswa?</h3>
+                                <p>Bisa. Gunakan akun Telegram yang sama, lalu kirim <code>/start NISN</code> satu per satu untuk setiap siswa yang ingin ditautkan.</p>
+                            </div>
+                            <div class="faq-item">
+                                <h3>Kalau aplikasi masih lokal apakah bisa dipakai?</h3>
+                                <p>Untuk penyimpanan token mungkin bisa, tetapi webhook Telegram memerlukan URL publik dan HTTPS agar sinkronisasi chat siswa berjalan normal.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+
+        <div class="footer">
+            Dokumen ini dapat dibuka langsung dari browser lokal maupun dari server sekolah. Jika diperlukan,
+            admin bisa mencetak isi panduan ini atau menyalin bagian "Contoh Pesan yang Bisa Dibagikan ke Siswa".
+        </div>
+    </div>
+</body>
+</html>
