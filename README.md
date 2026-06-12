@@ -1,6 +1,5 @@
 # ABSENSI MODIFIED
-
-Sistem absensi digital yang dirancang untuk membantu perusahaan dalam mengelola kehadiran karyawan secara efektif, akurat, dan terintegrasi.
+Absensi Modified adalah sistem manajemen kehadiran karyawan yang dikembangkan untuk mendukung proses pencatatan absensi, monitoring, dan pelaporan kehadiran secara digital di lingkungan perusahaan.
 
 ## About Absensi Modified
 
