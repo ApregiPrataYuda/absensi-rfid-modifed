@@ -170,7 +170,7 @@
                       <details data-pelanggaran-siswa {{ request()->routeIs('poin-pelanggaran.*') ? 'open' : '' }}>
                           <summary class="list-none flex items-center gap-3 px-3 py-2.5 rounded-lg transition text-gray-300 hover:bg-white/10 hover:text-white cursor-pointer">
                               <i class="fas fa-exclamation-triangle w-4 text-center"></i>
-                              <span class="sidebar-label text-[15px] font-semibold flex-1">Pelanggaran Siswa</span>
+                              <span class="sidebar-label text-[15px] font-semibold flex-1">Pelanggaran Karyawan</span>
                               <i class="fas fa-chevron-right settings-chevron sidebar-label text-[11px] opacity-80"></i>
                           </summary>
                           <div class="mt-2 pl-2 space-y-2">

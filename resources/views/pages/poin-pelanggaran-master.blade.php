@@ -8,7 +8,7 @@
         <div class="p-4 border-b border-gray-100 flex items-center justify-between gap-3">
             <div>
                 <h4 class="font-bold text-sm text-gray-800">Daftar Jenis Pelanggaran</h4>
-                <p class="text-xs text-gray-500 mt-1">Daftar ini menjadi referensi resmi saat pencatatan riwayat pelanggaran siswa.</p>
+                <p class="text-xs text-gray-500 mt-1">Daftar ini menjadi referensi resmi saat pencatatan riwayat pelanggaran karyawan.</p>
             </div>
             <div class="flex items-center gap-2">
                 <button onclick="refreshPoinPelanggaranData(true)" class="bg-white text-gray-700 border border-gray-200 px-3 py-1.5 rounded-lg text-xs font-bold shadow-sm hover:bg-gray-50 hover:text-indigo-700 transition" title="Perbarui Data">
