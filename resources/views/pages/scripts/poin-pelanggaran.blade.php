@@ -169,7 +169,7 @@
             if (!tbody) return;
 
             if (!Array.isArray(state.riwayat) || state.riwayat.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="9" class="p-8 text-center text-gray-400">Belum ada catatan pelanggaran siswa.</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="9" class="p-8 text-center text-gray-400">Belum ada catatan pelanggaran karyawan.</td></tr>';
                 return;
             }
 
@@ -217,7 +217,7 @@
             const currentSiswa = state.filters.siswa_id || '';
 
             if (kelasSelect) {
-                const kelasOptions = ['<option value="">Semua Kelas</option>'].concat(
+                const kelasOptions = ['<option value="">Semua Gedung</option>'].concat(
                     (state.kelas || []).map((row) => `<option value="${escapeHtml(row.nama)}">${escapeHtml(row.nama)}</option>`)
                 );
                 kelasSelect.innerHTML = kelasOptions.join('');
@@ -225,7 +225,7 @@
             }
 
             if (siswaSelect) {
-                const siswaOptions = ['<option value="">Semua Siswa</option>'].concat(
+                const siswaOptions = ['<option value="">Semua Gedung</option>'].concat(
                     (state.siswa || []).map((row) => `<option value="${Number(row.id)}">${escapeHtml(row.nama)} (${escapeHtml(row.kelas || '-')})</option>`)
                 );
                 siswaSelect.innerHTML = siswaOptions.join('');
@@ -401,7 +401,7 @@
             const renderDropdown = (keyword) => {
                 const rows = getFilteredSiswa(keyword);
                 if (rows.length === 0) {
-                    dropdown.innerHTML = '<div class="px-3 py-2 text-xs text-gray-500">Siswa tidak ditemukan.</div>';
+                    dropdown.innerHTML = '<div class="px-3 py-2 text-xs text-gray-500">Karyawan tidak ditemukan.</div>';
                     dropdown.classList.remove('hidden');
                     return;
                 }
@@ -471,18 +471,18 @@
             showModal(`
                 <div class="bg-white rounded-xl shadow-2xl border border-gray-100 overflow-hidden">
                     <div class="px-5 py-4 border-b border-gray-100 bg-gray-50/60">
-                        <h3 class="text-sm font-bold text-gray-800">${isEdit ? 'Edit Catatan Pelanggaran' : 'Catat Pelanggaran Siswa'}</h3>
+                        <h3 class="text-sm font-bold text-gray-800">${isEdit ? 'Edit Catatan Pelanggaran' : 'Catat Pelanggaran Karyawan'}</h3>
                     </div>
                     <form id="formRiwayatPelanggaran" class="p-5 space-y-4">
                         <input type="hidden" name="id" value="${isEdit ? Number(item.id) : ''}">
                         <div>
-                            <label class="block text-[11px] font-bold text-gray-700 mb-1">Siswa</label>
+                            <label class="block text-[11px] font-bold text-gray-700 mb-1">Karyawan</label>
                             <div class="relative">
-                                <input id="riwayatSiswaSearch" type="text" autocomplete="off" placeholder="Ketik nama atau NISN, lalu pilih siswa" value="${escapeHtml(siswaSearchValue)}" class="w-full bg-gray-50 border border-gray-200 text-gray-700 text-xs rounded-lg p-2.5">
+                                <input id="riwayatSiswaSearch" type="text" autocomplete="off" placeholder="Ketik nama atau NISN, lalu pilih karyawan" value="${escapeHtml(siswaSearchValue)}" class="w-full bg-gray-50 border border-gray-200 text-gray-700 text-xs rounded-lg p-2.5">
                                 <input id="riwayatSiswaId" type="hidden" name="siswa_id" value="${selectedSiswaId > 0 ? selectedSiswaId : ''}">
                                 <div id="riwayatSiswaDropdown" class="hidden absolute top-full left-0 right-0 mt-1 max-h-60 overflow-y-auto bg-white border border-gray-200 rounded-lg shadow-lg z-20"></div>
                             </div>
-                            <p class="mt-1 text-[11px] text-gray-500">Pilih siswa dari daftar hasil pencarian.</p>
+                            <p class="mt-1 text-[11px] text-gray-500">Pilih karyawan dari daftar hasil pencarian.</p>
                         </div>
                         <div>
                             <label class="block text-[11px] font-bold text-gray-700 mb-1">Jenis Pelanggaran</label>
@@ -568,7 +568,7 @@
             const siswaId = Number(formData.get('siswa_id') || 0);
 
             if (siswaId <= 0) {
-                showAlert('error', 'Pilih siswa dari daftar pencarian yang muncul.');
+                showAlert('error', 'Pilih karyawan dari daftar pencarian yang muncul.');
                 return;
             }
 
@@ -587,7 +587,7 @@
                 await apiRequest(url, { method, body: JSON.stringify(payload) });
                 closeModal();
                 await loadPoinPelanggaranData();
-                showAlert('success', isEdit ? 'Catatan pelanggaran berhasil diperbarui.' : 'Pelanggaran siswa berhasil dicatat.');
+                showAlert('success', isEdit ? 'Catatan pelanggaran berhasil diperbarui.' : 'Pelanggaran karyawan berhasil dicatat.');
             } catch (err) {
                 showAlert('error', err.message || 'Gagal menyimpan catatan pelanggaran.');
             }
@@ -625,7 +625,7 @@
             const row = (state.riwayat || []).find((item) => Number(item.id) === Number(id));
             if (!row) return;
 
-            const message = `Hapus catatan pelanggaran siswa "${row.siswa_nama}"?`;
+            const message = `Hapus catatan pelanggaran karyawan "${row.siswa_nama}"?`;
             const confirmed = window.Swal
                 ? (await Swal.fire({
                     icon: 'warning',
