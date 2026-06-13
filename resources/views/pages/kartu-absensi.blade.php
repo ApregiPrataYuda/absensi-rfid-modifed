@@ -8,7 +8,7 @@
         <div class="p-4 border-b border-gray-100 flex flex-col md:flex-row justify-between items-center gap-4 bg-gray-50/30">
             <div>
                 <h3 class="font-bold text-sm text-gray-800">Kartu Absensi</h3>
-                <p class="text-xs text-gray-500">Kelola daftar kartu fisik, tautkan ke siswa, dan pantau scan terakhir.</p>
+                <p class="text-xs text-gray-500">Kelola daftar kartu fisik, tautkan ke karyawan, dan pantau scan terakhir.</p>
             </div>
             <div class="flex items-center gap-2 flex-wrap justify-end">
                 <span id="kartu-absensi-auto-refresh-status" class="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2.5 py-1 text-[11px] font-semibold text-emerald-700 border border-emerald-100">
@@ -58,7 +58,7 @@
                 </div>
 
                 <div class="lg:col-span-2">
-                    <label for="siswa_id" class="block text-[10px] font-bold text-gray-400 uppercase mb-2">Tautkan ke Siswa</label>
+                    <label for="siswa_id" class="block text-[10px] font-bold text-gray-400 uppercase mb-2">Tautkan ke karyawan</label>
                     <select id="siswa_id" name="siswa_id" class="w-full bg-gray-50 border border-gray-200 text-gray-900 text-xs rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block p-2.5 transition-all">
                         <option value="">Belum ditautkan</option>
                         @foreach ($students as $student)
@@ -100,7 +100,7 @@
                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                     <i class="fas fa-search text-gray-400 text-xs"></i>
                 </div>
-                <input id="searchKartuAbsensi" type="text" oninput="handleKartuAbsensiSearch(this.value)" class="bg-white border border-gray-200 text-gray-900 text-xs rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 p-2 transition-all" placeholder="Cari kode, nama, NISN, kelas...">
+                <input id="searchKartuAbsensi" type="text" oninput="handleKartuAbsensiSearch(this.value)" class="bg-white border border-gray-200 text-gray-900 text-xs rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 p-2 transition-all" placeholder="Cari kode, nama, NIK, Gedung...">
             </div>
         </div>
 
@@ -110,8 +110,8 @@
                     <tr>
                         <th class="p-3 text-center w-12">No</th>
                         <th class="p-3">Kode Kartu</th>
-                        <th class="p-3">Siswa</th>
-                        <th class="p-3 hidden md:table-cell">Kelas</th>
+                        <th class="p-3">Karyawan</th>
+                        <th class="p-3 hidden md:table-cell">Gedung - Lantai</th>
                         <th class="p-3 hidden lg:table-cell">Scan Terakhir</th>
                         <th class="p-3 text-center w-32">Aksi</th>
                     </tr>

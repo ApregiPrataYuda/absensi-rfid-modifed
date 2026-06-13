@@ -20,7 +20,7 @@
               <div class="flex items-center space-x-3 relative z-10 w-full">
                   <div class="w-8 h-8 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg flex items-center justify-center text-white shadow-lg shadow-indigo-900/50 shrink-0 transition-all duration-300">
                       <img id="sidebarBrandLogoImg" src="{{ $brandLogoUrl ?? '' }}" alt="Logo" class="w-full h-full object-cover rounded-lg {{ empty($brandLogoUrl) ? 'hidden' : '' }}">
-                      <i id="sidebarBrandLogoIcon" class="fas fa-qrcode text-sm {{ !empty($brandLogoUrl) ? 'hidden' : '' }}"></i>
+                      <i id="sidebarBrandLogoIcon" class="fas fa-screwdriver-wrench text-sm {{ !empty($brandLogoUrl) ? 'hidden' : '' }}"></i>
                   </div>
                   <div class="sidebar-label transition-opacity duration-300 whitespace-nowrap">
                       <h1 id="sidebarBrandName" class="font-bold text-base tracking-wide text-white">{{ $brandName }}</h1>
@@ -102,15 +102,15 @@
                   @if (auth()->user()?->can('kelas.manage') || auth()->user()?->can('kenaikan-kelas.manage'))
                       <details data-akademik-menu {{ request()->routeIs('kelola-kelas') || request()->routeIs('kenaikan-kelas') ? 'open' : '' }}>
                           <summary class="list-none flex items-center gap-3 px-3 py-2.5 rounded-lg transition text-gray-300 hover:bg-white/10 hover:text-white cursor-pointer">
-                              <i class="fas fa-school w-4 text-center"></i>
-                              <span class="sidebar-label text-[15px] font-semibold flex-1">Akademik</span>
+                              <i class="fas fa-building w-4 text-center"></i>
+                              <span class="sidebar-label text-[15px] font-semibold flex-1">Gedung - Lantai</span>
                               <i class="fas fa-chevron-right settings-chevron sidebar-label text-[11px] opacity-80"></i>
                           </summary>
                           <div class="mt-2 pl-2 space-y-2">
                               @can('kelas.manage')
                                   <a href="{{ route('kelola-kelas') }}" class="flex items-center gap-2 px-3 py-2 rounded-lg transition {{ request()->routeIs('kelola-kelas') ? 'bg-white/15 text-white' : 'text-gray-300 hover:bg-white/10 hover:text-white' }}">
-                                      <i class="fas fa-school w-4 text-center"></i>
-                                      <span class="sidebar-label text-[14px] font-medium">Kelola Kelas</span>
+                                      <i class="fas fa-building-flag w-4 text-center"></i>
+                                      <span class="sidebar-label text-[14px] font-medium">Kelola Gedung - Lantai</span>
                                   </a>
                               @endcan
                               @can('kenaikan-kelas.manage')
@@ -170,7 +170,7 @@
                       <details data-pelanggaran-siswa {{ request()->routeIs('poin-pelanggaran.*') ? 'open' : '' }}>
                           <summary class="list-none flex items-center gap-3 px-3 py-2.5 rounded-lg transition text-gray-300 hover:bg-white/10 hover:text-white cursor-pointer">
                               <i class="fas fa-exclamation-triangle w-4 text-center"></i>
-                              <span class="sidebar-label text-[15px] font-semibold flex-1">Pelanggaran Karyawan</span>
+                              <span class="sidebar-label text-[15px] font-semibold flex-1">Pelanggaran</span>
                               <i class="fas fa-chevron-right settings-chevron sidebar-label text-[11px] opacity-80"></i>
                           </summary>
                           <div class="mt-2 pl-2 space-y-2">

@@ -1,6 +1,6 @@
 @extends('layouts.page')
 
-@section('title', 'Dashboard Siswa')
+@section('title', 'Dashboard Karyawan')
 
 @section('content')
 <div id="view-siswa-dashboard" class="view-section active animate-fade-in space-y-4 md:space-y-6">

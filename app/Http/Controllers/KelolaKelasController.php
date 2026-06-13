@@ -117,7 +117,7 @@ class KelolaKelasController extends Controller
         ])->loadCount('siswa');
 
         return response()->json([
-            'message' => 'Kelas berhasil ditambahkan.',
+            'message' => 'Gedung - Lantai berhasil ditambahkan.',
             'data' => $this->formatKelasResponse($kelas),
         ]);
     }
@@ -139,7 +139,7 @@ class KelolaKelasController extends Controller
                     }
 
                     if (!User::role('wakel')->whereKey((int) $value)->exists()) {
-                        $fail('Wali kelas harus akun dengan role wakel.');
+                        $fail('Mandor harus akun dengan role mandor.');
                     }
                 },
             ],
@@ -173,7 +173,7 @@ class KelolaKelasController extends Controller
         ])->loadCount('siswa');
 
         return response()->json([
-            'message' => 'Kelas berhasil diperbarui.',
+            'message' => 'Gedung - Lantai berhasil diperbarui.',
             'data' => $this->formatKelasResponse($kelas),
         ]);
     }
@@ -216,7 +216,7 @@ class KelolaKelasController extends Controller
         });
 
         return response()->json([
-            'message' => 'Kelas berhasil dihapus.',
+            'message' => 'Gedung - Lantai berhasil dihapus.',
         ]);
     }
 

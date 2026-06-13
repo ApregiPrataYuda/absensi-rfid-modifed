@@ -524,10 +524,12 @@
       function formatRoleLabel(rawRole) {
         const role = String(rawRole || '').toLowerCase().trim();
         if (!role) return 'USER';
-        if (role === 'wakel') return 'WALI KELAS';
+        if (role === 'wakel') return 'Mandor';
         if (role === 'kepsek') return 'KEPALA SEKOLAH';
         if (role === 'wakasek') return 'WAKIL KEPALA SEKOLAH';
         if (role === 'bendahara') return 'BENDAHARA';
+        if (role === 'siswa') return 'Karyawan';
+        if (role === 'admin') return 'Admin';
         if (role === 'super-admin') return 'SUPER ADMIN';
         return role.toUpperCase();
       }

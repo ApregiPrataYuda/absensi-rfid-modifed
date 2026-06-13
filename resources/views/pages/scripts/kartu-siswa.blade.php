@@ -3566,7 +3566,7 @@ function handleArchiveAndReset() {
                         <div class="flex items-start justify-between gap-4">
                             <div>
                                 <p class="text-[11px] font-semibold uppercase tracking-[0.2em] text-indigo-100">${patchedEscHtml(websiteName)}</p>
-                                <h3 class="mt-1 text-xl font-extrabold leading-tight">Kartu Pelajar Digital</h3>
+                                <h3 class="mt-1 text-xl font-extrabold leading-tight">Kartu Karyawan Digital</h3>
                                 <p class="mt-1 text-xs text-indigo-100">Gunakan QR untuk proses absensi masuk dan pulang.</p>
                             </div>
                             <span class="inline-flex items-center rounded-full border border-white/30 bg-white/15 px-3 py-1 text-[11px] font-semibold uppercase tracking-wide">
@@ -3581,18 +3581,18 @@ function handleArchiveAndReset() {
                                 <p class="mt-1 text-sm font-semibold text-gray-900">${data.nama || '-'}</p>
                             </div>
                             <div class="rounded-xl border border-gray-200 bg-gray-50 px-3 py-2">
-                                <p class="text-[11px] font-semibold uppercase tracking-wide text-gray-500">NISN</p>
+                                <p class="text-[11px] font-semibold uppercase tracking-wide text-gray-500">NIK</p>
                                 <p class="mt-1 font-mono text-sm font-semibold text-gray-900">${data.nisn}</p>
                             </div>
                             <div class="rounded-xl border border-gray-200 bg-gray-50 px-3 py-2">
-                                <p class="text-[11px] font-semibold uppercase tracking-wide text-gray-500">Kelas</p>
+                                <p class="text-[11px] font-semibold uppercase tracking-wide text-gray-500">Gedung - Lantai</p>
                                 <p class="mt-1 text-sm font-semibold text-gray-900">${data.kelas || '-'}</p>
                             </div>
                         </div>
 
                         <div class="mt-5 rounded-2xl border border-indigo-100 bg-indigo-50/50 p-4">
                             <div id="${qrId}" class="mx-auto flex min-h-[190px] items-center justify-center rounded-xl bg-white p-2 shadow-sm"></div>
-                            <p class="mt-3 text-center text-[11px] text-gray-600">Scan QR ini di mesin absensi sekolah.</p>
+                            <p class="mt-3 text-center text-[11px] text-gray-600">Scan QR ini di mesin absensi Perusahaan - Kantor.</p>
                         </div>
                     </div>
                     <div class="relative border-t border-gray-100 bg-gray-50/80 px-6 py-3 text-[11px] text-gray-600">

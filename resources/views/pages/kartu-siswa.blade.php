@@ -1,6 +1,6 @@
 @extends('layouts.page')
 
-@section('title', 'Kartu Pelajar Digital')
+@section('title', 'Kartu Karyawan Digital')
 
 @section('content')
 <div id="view-kartu-siswa" class="view-section active animate-fade-in">

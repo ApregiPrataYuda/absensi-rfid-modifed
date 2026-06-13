@@ -1,14 +1,14 @@
 @extends('layouts.page')
 
-@section('title', 'Kelola Kelas')
+@section('title', 'Kelola Gedung - Lantai')
 
 @section('content')
 <div id="view-kelola-kelas" class="view-section active animate-fade-in">
   <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
       <div class="p-4 border-b border-gray-100 flex flex-col md:flex-row justify-between items-center gap-4 bg-gray-50/30">
         <div>
-            <h3 class="font-bold text-sm text-gray-800">Kelola Kelas</h3>
-            <p class="text-xs text-gray-500">Kelola daftar kelas, wali kelas, dan kapasitas siswa.</p>
+            <h3 class="font-bold text-sm text-gray-800">Kelola Gedung - Lantai</h3>
+            <p class="text-xs text-gray-500">Kelola daftar Gedung, Mandor, dan kapasitas karyawan.</p>
         </div>
         <div class="flex items-center gap-2 flex-wrap justify-end">
             <button onclick="refreshData('kelas')" class="bg-white text-gray-600 border border-gray-200 px-3 py-1.5 rounded-lg text-xs font-bold shadow-sm hover:bg-gray-50 hover:text-indigo-600 transition" title="Perbarui Data">
@@ -41,7 +41,7 @@
               <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <i class="fas fa-search text-gray-400 text-xs"></i>
               </div>
-              <input type="text" oninput="handleTableSearch('kelas', this.value)" class="bg-gray-50 border border-gray-200 text-gray-900 text-xs rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 p-2 transition-all" placeholder="Cari Nama Kelas...">
+              <input type="text" oninput="handleTableSearch('kelas', this.value)" class="bg-gray-50 border border-gray-200 text-gray-900 text-xs rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 p-2 transition-all" placeholder="Cari Gedung - Kelas...">
           </div>
       </div>
 
@@ -50,17 +50,17 @@
               <thead class="bg-gray-50 text-gray-500 text-[10px] uppercase font-semibold border-b border-gray-200">
                   <tr>
                       <th class="p-3 text-center w-12">No</th>
-                      <th class="p-3">Nama Kelas</th>
-                      <th class="p-3 hidden md:table-cell">Wali Kelas</th>
+                      <th class="p-3">Nama Gedung - Lantai</th>
+                      <th class="p-3 hidden md:table-cell">Mandor (Pengelola)</th>
                       <th class="p-3 hidden sm:table-cell">Kapasitas</th>
-                      <th class="p-3 hidden md:table-cell">Jumlah Siswa</th>
+                      <th class="p-3 hidden md:table-cell">Jumlah Karyawan</th>
                       <th class="p-3 hidden lg:table-cell">Jam Absen</th>
                       <th class="p-3 text-center w-40">Aksi</th>
                   </tr>
               </thead>
               <tbody id="tbody-kelas" class="divide-y divide-gray-50 bg-white text-xs text-gray-700">
                   <tr>
-                      <td colspan="7" class="p-8 text-center text-gray-400">Memuat data kelas...</td>
+                      <td colspan="7" class="p-8 text-center text-gray-400">Memuat data gedung - lantai...</td>
                   </tr>
               </tbody>
           </table>

@@ -10,9 +10,9 @@
                 <h3 class="font-bold text-sm text-gray-800">Manajemen User</h3>
                 <p class="text-xs text-gray-500 mt-1">
                     @if (!empty($viewerCanManageAdminRole))
-                        Kelola akun role admin, bendahara, kepsek, dan wakasek. Role super-admin hanya bisa dilihat (read-only).
+                        Kelola akun role admin, mandor. Role super-admin hanya bisa dilihat (read-only).
                     @else
-                        Kelola akun role bendahara, kepsek, dan wakasek.
+                        Kelola akun role 
                     @endif
                 </p>
             </div>

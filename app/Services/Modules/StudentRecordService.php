@@ -47,7 +47,7 @@ class StudentRecordService extends BaseActionService
         if ($role === 'wakel') {
             $wakelKelas = $this->getWakelKelasFromAuth($auth);
             if ($wakelKelas === null) {
-                return ['success' => false, 'message' => 'Akun wali kelas belum ditautkan ke kelas.'];
+                return ['success' => false, 'message' => 'Akun mandor belum ditautkan ke gedung.'];
             }
 
             $query->where('kelas', $wakelKelas);
@@ -101,11 +101,11 @@ class StudentRecordService extends BaseActionService
         $payload = $args[0] ?? [];
         $nisn = isset($payload['nisn']) ? trim((string) $payload['nisn']) : '';
         if ($nisn === '') {
-            return ['success' => false, 'message' => 'NISN wajib diisi'];
+            return ['success' => false, 'message' => 'NIK wajib diisi'];
         }
 
         if (Siswa::query()->where('nisn', $nisn)->exists()) {
-            return ['success' => false, 'message' => 'NISN sudah terdaftar'];
+            return ['success' => false, 'message' => 'NIK sudah terdaftar'];
         }
 
         $kelasInput = $this->normalizeKelasValue($payload['kelas'] ?? null);
@@ -113,11 +113,11 @@ class StudentRecordService extends BaseActionService
         if ($role === 'wakel') {
             $wakelKelas = $this->getWakelKelasFromAuth($auth);
             if ($wakelKelas === null) {
-                return ['success' => false, 'message' => 'Akun wali kelas belum ditautkan ke kelas.'];
+                return ['success' => false, 'message' => 'Akun mandor belum ditautkan ke kelas.'];
             }
 
             if ($kelasInput !== null && $kelasInput !== $wakelKelas) {
-                return ['success' => false, 'message' => 'Wali kelas hanya boleh menambah siswa di kelasnya sendiri.'];
+                return ['success' => false, 'message' => 'mandor hanya boleh menambah karaywan di gedung yg di kelola sendiri.'];
             }
 
             $kelas = $this->syncKelasValue($wakelKelas);
@@ -162,30 +162,30 @@ class StudentRecordService extends BaseActionService
         $oldNisn = trim((string) ($args[0] ?? ''));
         $payload = $args[1] ?? [];
         if ($oldNisn === '') {
-            return ['success' => false, 'message' => 'NISN lama wajib diisi'];
+            return ['success' => false, 'message' => 'NIK lama wajib diisi'];
         }
 
         $siswa = Siswa::query()->where('nisn', $oldNisn)->first();
         if (!$siswa) {
-            return ['success' => false, 'message' => 'Siswa tidak ditemukan (Cek spasi pada NISN)'];
+            return ['success' => false, 'message' => 'Karyawan tidak ditemukan (Cek spasi pada NIK)'];
         }
 
         $wakelKelas = null;
         if ($role === 'wakel') {
             $wakelKelas = $this->getWakelKelasFromAuth($auth);
             if ($wakelKelas === null) {
-                return ['success' => false, 'message' => 'Akun wali kelas belum ditautkan ke kelas.'];
+                return ['success' => false, 'message' => 'Akun Mandor belum ditautkan ke Gedung.'];
             }
 
             if ($this->normalizeKelasValue($siswa->kelas) !== $wakelKelas) {
-                return ['success' => false, 'message' => 'Wali kelas hanya boleh mengubah siswa di kelasnya sendiri.'];
+                return ['success' => false, 'message' => 'Mandor hanya boleh mengubah karyawan di gedung yg dia kelola sendiri.'];
             }
         }
 
         $oldNisnValue = trim((string) $siswa->nisn);
         $newNisn = isset($payload['nisn']) ? trim((string) $payload['nisn']) : $siswa->nisn;
         if ($newNisn !== $siswa->nisn && Siswa::query()->where('nisn', $newNisn)->exists()) {
-            return ['success' => false, 'message' => 'NISN sudah terdaftar'];
+            return ['success' => false, 'message' => 'NIK sudah terdaftar'];
         }
 
         $kelas = $this->normalizeKelasValue($siswa->kelas);
@@ -194,7 +194,7 @@ class StudentRecordService extends BaseActionService
         }
         if ($role === 'wakel') {
             if ($kelas !== null && $kelas !== $wakelKelas) {
-                return ['success' => false, 'message' => 'Wali kelas tidak boleh memindahkan siswa ke kelas lain.'];
+                return ['success' => false, 'message' => 'Mandor tidak boleh memindahkan karyawan ke gedung - lantai lain.'];
             }
 
             $kelas = $wakelKelas;
@@ -258,7 +258,7 @@ class StudentRecordService extends BaseActionService
             ->exists();
 
         if ($conflictingCard) {
-            throw new \RuntimeException('Nomor kartu sudah ditautkan ke siswa lain.');
+            throw new \RuntimeException('Nomor kartu sudah ditautkan ke Karyawan lain.');
         }
 
         KartuAbsensi::query()
@@ -286,22 +286,22 @@ class StudentRecordService extends BaseActionService
 
         $nisn = $args[0] ?? null;
         if (!$nisn) {
-            return ['success' => false, 'message' => 'NISN wajib diisi'];
+            return ['success' => false, 'message' => 'NIK wajib diisi'];
         }
 
         $siswa = Siswa::query()->where('nisn', trim((string) $nisn))->first();
         if (!$siswa) {
-            return ['success' => false, 'message' => 'Data siswa tidak ditemukan.'];
+            return ['success' => false, 'message' => 'Data Karyawan tidak ditemukan.'];
         }
 
         if ($role === 'wakel') {
             $wakelKelas = $this->getWakelKelasFromAuth($auth);
             if ($wakelKelas === null) {
-                return ['success' => false, 'message' => 'Akun wali kelas belum ditautkan ke kelas.'];
+                return ['success' => false, 'message' => 'Akun mandor belum ditautkan ke kelas.'];
             }
 
             if ($this->normalizeKelasValue($siswa->kelas) !== $wakelKelas) {
-                return ['success' => false, 'message' => 'Wali kelas hanya boleh menghapus siswa di kelasnya sendiri.'];
+                return ['success' => false, 'message' => 'mandor hanya boleh menghapus karyawan di gedung yang di kelola sendiri.'];
             }
         }
 
@@ -419,22 +419,22 @@ class StudentRecordService extends BaseActionService
 
         $nisn = trim((string) ($args[0] ?? ''));
         if ($nisn === '') {
-            return ['success' => false, 'message' => 'NISN tidak valid.'];
+            return ['success' => false, 'message' => 'NIK tidak valid.'];
         }
 
         $siswa = Siswa::query()->where('nisn', $nisn)->first();
         if (!$siswa) {
-            return ['success' => false, 'message' => 'NISN tidak ditemukan.'];
+            return ['success' => false, 'message' => 'NIK tidak ditemukan.'];
         }
 
         $siswaKelas = $this->normalizeKelasValue($siswa->kelas);
         if ($role === 'wakel') {
             $wakelKelas = $this->getWakelKelasFromAuth($auth);
             if ($wakelKelas === null) {
-                return ['success' => false, 'message' => 'Akun wali kelas belum ditautkan ke kelas.'];
+                return ['success' => false, 'message' => 'Akun mandor belum ditautkan ke gedung.'];
             }
             if ($siswaKelas !== $wakelKelas) {
-                return ['success' => false, 'message' => 'Hanya bisa scan siswa kelas yang Anda ampu.'];
+                return ['success' => false, 'message' => 'Hanya bisa scan karyawan di gedung yang Anda kelola.'];
             }
         }
 
@@ -442,7 +442,7 @@ class StudentRecordService extends BaseActionService
             $piketKelas = $this->getPiketKelasFromAuth($auth);
             // Jika kelas piket kosong => boleh scan semua kelas.
             if ($piketKelas !== null && $siswaKelas !== $piketKelas) {
-                return ['success' => false, 'message' => 'Akun piket ini hanya bisa scan kelas ' . $piketKelas . '.'];
+                return ['success' => false, 'message' => 'Akun piket ini hanya bisa scan gedung ' . $piketKelas . '.'];
             }
         }
 

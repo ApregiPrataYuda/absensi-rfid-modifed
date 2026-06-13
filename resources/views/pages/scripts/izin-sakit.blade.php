@@ -630,9 +630,9 @@
                                     <label class="${labelClass}">Karyawan</label>
                                     <div id="izin-siswa-locked-text" class="w-full bg-gray-50 border border-gray-200 text-sm rounded-lg p-2.5 text-gray-700">-</div>
                                 ` : `
-                                    <label class="${labelClass}">Karyawan</label>
+                                    <label class="${labelClass}">Nama Karyawan</label>
                                     <div class="relative">
-                                        <input id="izin-siswa-search" type="text" class="${inputClass}" placeholder="Ketik nama/NISN/kelas siswa" autocomplete="off">
+                                        <input id="izin-siswa-search" type="text" class="${inputClass}" placeholder="Ketik nama/NIK/Gedung karyawan" autocomplete="off">
                                         <div id="izin-siswa-dropdown" class="hidden absolute top-full left-0 right-0 mt-1 max-h-60 overflow-y-auto bg-white border border-gray-200 rounded-lg shadow-lg z-20"></div>
                                     </div>
                                     <p class="mt-1 text-[11px] text-gray-500">Ketik untuk mencari siswa, lalu pilih dari dropdown.</p>

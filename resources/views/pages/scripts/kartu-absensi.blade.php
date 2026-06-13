@@ -489,13 +489,13 @@
                             </div>
 
                             <div>
-                                <label class="block mb-1 text-xs font-bold text-gray-500 uppercase tracking-wide">Tautkan ke Siswa</label>
+                                <label class="block mb-1 text-xs font-bold text-gray-500 uppercase tracking-wide">Tautkan ke Karyawan</label>
                                 <div class="relative z-30">
                                     <input
                                         id="kartuAbsensiStudentSearch"
                                         type="text"
                                         value="${escapeHtml(selectedStudentLabel)}"
-                                        placeholder="Cari nama atau NISN siswa"
+                                        placeholder="Cari nama atau NIK Karyawan"
                                         autocomplete="off"
                                         onfocus="openKartuAbsensiStudentDropdown()"
                                         oninput="filterKartuAbsensiStudentDropdown(this.value)"
@@ -505,7 +505,7 @@
                                     <input id="kartuAbsensiStudentId" type="hidden" value="${card?.siswa_id ? escapeHtml(card.siswa_id) : ''}">
                                     <div id="kartuAbsensiStudentDropdown" class="hidden absolute left-0 right-0 z-40 w-full mt-1 bg-white border border-gray-200 rounded-lg shadow-xl max-h-56 overflow-y-auto"></div>
                                 </div>
-                                <p class="mt-2 text-[11px] text-gray-500">Biarkan kosong jika kartu belum ingin ditautkan ke siswa.</p>
+                                <p class="mt-2 text-[11px] text-gray-500">Biarkan kosong jika kartu belum ingin ditautkan ke Karyawan.</p>
                             </div>
 
                             <div class="flex justify-end gap-2 pt-2">

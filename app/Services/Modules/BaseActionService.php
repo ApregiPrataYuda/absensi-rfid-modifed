@@ -296,7 +296,7 @@ abstract class BaseActionService
 
         return [
             'success' => false,
-            'message' => 'Akun piket belum ditautkan ke kelas.',
+            'message' => 'Akun piket belum ditautkan ke gedung.',
         ];
     }
 
@@ -311,7 +311,7 @@ abstract class BaseActionService
         if ($piketKelas === null) {
             return [
                 'success' => false,
-                'message' => 'Akun piket belum ditautkan ke kelas.',
+                'message' => 'Akun piket belum ditautkan ke gedung.',
             ];
         }
 
@@ -321,7 +321,7 @@ abstract class BaseActionService
 
         return [
             'success' => false,
-            'message' => 'Akun piket ini hanya bisa mengakses kelas ' . $piketKelas . '.',
+            'message' => 'Akun piket ini hanya bisa mengakses gedung ' . $piketKelas . '.',
         ];
     }
 
@@ -347,7 +347,7 @@ abstract class BaseActionService
         if ($role === 'piket') {
             $kelasIds = $this->getPelajaranPiketKelasIds($auth);
             if ($kelasIds === null) {
-                return ['success' => false, 'message' => 'Akun piket belum ditautkan ke kelas.'];
+                return ['success' => false, 'message' => 'Akun piket belum ditautkan ke gedung.'];
             }
 
             if (count($kelasIds) === 0) {
@@ -366,7 +366,7 @@ abstract class BaseActionService
     {
         $kelasNama = trim((string) ($sesi->kelas?->nama ?? ''));
         if ($kelasNama === '') {
-            return ['success' => false, 'message' => 'Kelas sesi pelajaran tidak valid.'];
+            return ['success' => false, 'message' => 'gedung sesi pekerjaan tidak valid.'];
         }
 
         $piketAccess = $this->ensurePelajaranPiketKelasAccess($auth, $kelasNama);
@@ -385,11 +385,11 @@ abstract class BaseActionService
 
         $jadwalGuruId = (int) ($sesi->jadwalPelajaran?->guru_id ?? $sesi->guru_id ?? 0);
         if ($jadwalGuruId <= 0) {
-            return ['success' => false, 'message' => 'Jadwal pelajaran belum ditautkan ke guru.'];
+            return ['success' => false, 'message' => 'Jadwal pekerjaan belum ditautkan ke mandor.'];
         }
 
         if ($jadwalGuruId !== (int) $user->id) {
-            return ['success' => false, 'message' => 'Sesi ini bukan jadwal pelajaran Anda.'];
+            return ['success' => false, 'message' => 'Sesi ini bukan jadwal pekerjaan Anda.'];
         }
 
         return null;

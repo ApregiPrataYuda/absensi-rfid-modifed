@@ -159,7 +159,7 @@
             if (state.page < 1) state.page = 1;
 
             if (total === 0) {
-                if (infoEl) infoEl.textContent = 'Tidak ada data kelas.';
+                if (infoEl) infoEl.textContent = 'Tidak ada data gedung - lantai.';
                 if (btnPrev) btnPrev.disabled = true;
                 if (btnNext) btnNext.disabled = true;
                 return;
@@ -169,7 +169,7 @@
             const endIdx = state.limit === Infinity ? total : Math.min(startIdx + state.limit, total);
 
             if (infoEl) {
-                infoEl.textContent = `Menampilkan ${startIdx + 1} - ${endIdx} dari ${total} kelas`;
+                infoEl.textContent = `Menampilkan ${startIdx + 1} - ${endIdx} dari ${total} Gedung - Lantai`;
             }
             if (btnPrev) btnPrev.disabled = state.page <= 1;
             if (btnNext) btnNext.disabled = state.page >= totalPages;
@@ -181,7 +181,7 @@
 
             const total = state.filtered.length;
             if (total === 0) {
-                tbody.innerHTML = '<tr><td colspan="7" class="p-8 text-center text-gray-400">Data kelas tidak ditemukan.</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="7" class="p-8 text-center text-gray-400">Data gedung - lantai tidak ditemukan.</td></tr>';
                 updatePagination();
                 return;
             }
@@ -231,7 +231,7 @@
             updatePagination();
         }
 
-        function renderKelasLoading(message = 'Memuat data kelas...') {
+        function renderKelasLoading(message = 'Memuat data gedung - lantai...') {
             const tbody = document.getElementById('tbody-kelas');
             if (!tbody) return;
 
@@ -292,7 +292,7 @@
             const tbody = document.getElementById('tbody-kelas');
             if (!tbody) return;
 
-            renderKelasLoading('Memuat data kelas...');
+            renderKelasLoading('Memuat data gedung - lantai...');
             try {
                 const res = await apiRequest(window.APP_ROUTES?.kelolaKelasData);
                 state.fullData = Array.isArray(res?.data) ? res.data : [];
@@ -310,7 +310,7 @@
                 renderTingkatFilter();
                 applyFilters();
                 if (showToast) {
-                    showAlert('success', 'Data kelas diperbarui.');
+                    showAlert('success', 'Data gedung - Lantai diperbarui.');
                 }
             } catch (err) {
                 tbody.innerHTML = `<tr><td colspan="7" class="p-8 text-center text-red-500">${escapeHtml(err.message || err)}</td></tr>`;
@@ -370,7 +370,7 @@
             if (!dropdown) return;
 
             if (!items || items.length === 0) {
-                dropdown.innerHTML = '<div class="px-4 py-3 text-xs text-gray-400 italic">Guru tidak ditemukan.</div>';
+                dropdown.innerHTML = '<div class="px-4 py-3 text-xs text-gray-400 italic">mandor tidak ditemukan.</div>';
                 return;
             }
 
@@ -482,31 +482,31 @@
             return `
                 <div class="bg-white rounded-2xl shadow-2xl overflow-hidden">
                     <div class="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50/50">
-                        <h3 class="text-xl font-bold text-gray-800">${isEdit ? 'Edit Kelas' : 'Tambah Kelas'}</h3>
+                        <h3 class="text-xl font-bold text-gray-800">${isEdit ? 'Edit Gedung - Lantai' : 'Tambah Gedung - Lantai'}</h3>
                         <button onclick="closeModal()" class="text-gray-400 hover:text-gray-600"><i class="fas fa-times text-lg"></i></button>
                     </div>
                     <div class="p-6 max-h-[75vh] overflow-y-auto">
                         <form onsubmit="saveKelas(event, ${isEdit ? kelasId : 'null'})" class="space-y-4">
                             <div>
-                                <label class="${labelClass}">Nama Kelas</label>
-                                <input id="kelasNama" type="text" value="${escapeHtml(data.nama || '')}" placeholder="Contoh: 10 IPA 1" required class="${inputClass}">
+                                <label class="${labelClass}">Nama Gedung - Lantai</label>
+                                <input id="kelasNama" type="text" value="${escapeHtml(data.nama || '')}" placeholder="Contoh: Gedung 60 - Lantai 1" required class="${inputClass}">
                             </div>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
-                                    <label class="${labelClass}">Wali Kelas</label>
+                                    <label class="${labelClass}">Mandor (Pengelola Gedung - Lantai)</label>
                                     <div class="relative">
-                                        <input id="kelasWaliSearch" type="text" value="${escapeHtml(selectedGuruLabel)}" placeholder="Cari nama/username guru" class="${inputClass}" autocomplete="off" onfocus="openWaliKelasDropdown()" oninput="filterWaliKelasDropdown(this.value)" onblur="closeWaliKelasDropdown()">
+                                        <input id="kelasWaliSearch" type="text" value="${escapeHtml(selectedGuruLabel)}" placeholder="Cari nama mandor" class="${inputClass}" autocomplete="off" onfocus="openWaliKelasDropdown()" oninput="filterWaliKelasDropdown(this.value)" onblur="closeWaliKelasDropdown()">
                                         <input id="kelasWali" type="hidden" value="${selectedGuruId}">
                                         <div id="dropdownWaliKelasList" class="hidden absolute z-20 w-full bg-white border border-gray-200 rounded-lg shadow-xl max-h-40 overflow-y-auto mt-1"></div>
                                     </div>
                                 </div>
                                 <div>
-                                    <label class="${labelClass}">Kapasitas</label>
-                                    <input id="kelasKapasitas" type="number" min="1" value="${escapeHtml(data.kapasitas ?? '')}" placeholder="40" class="${inputClass}">
+                                    <label class="${labelClass}">Jumlah Kapasitas Karyawan per Gedung</label>
+                                    <input id="kelasKapasitas" type="number" min="1" value="${escapeHtml(data.kapasitas ?? '')}" placeholder="15" class="${inputClass}">
                                 </div>
                             </div>
                             <div class="border border-gray-100 rounded-xl p-3 bg-gray-50/50">
-                                <p class="text-xs font-bold text-gray-600 mb-3 uppercase">Jam Absensi Per Kelas</p>
+                                <p class="text-xs font-bold text-gray-600 mb-3 uppercase">Jam Absensi Per Gedung - Lantai</p>
                                 <div class="overflow-x-auto">
                                     <table class="inline-table w-auto min-w-0 border-collapse">
                                         <thead>
@@ -523,7 +523,7 @@
                                     </table>
                                 </div>
                                 <p class="text-[11px] text-gray-500 mt-3">
-                                    Centang <b>Libur</b> agar hari tersebut tidak dihitung alpa otomatis.
+                                    Centang <b>Libur</b> agar hari tersebut tidak dihitung tidak masuk kerja secara otomatis.
                                 </p>
                             </div>
                             <div class="flex justify-end gap-2 pt-2">
@@ -551,24 +551,24 @@
             const kapasitasRaw = document.getElementById('kelasKapasitas')?.value?.trim() || '';
 
             if (!nama) {
-                showAlert('error', 'Nama kelas wajib diisi.');
+                showAlert('error', 'Nama Gedung wajib diisi.');
                 return null;
             }
 
             if (waliKelasText !== '' && waliKelasRaw === '') {
-                showAlert('error', 'Pilih wali kelas dari dropdown.');
+                showAlert('error', 'Pilih nama mandor dari dropdown.');
                 return null;
             }
 
             const waliKelas = waliKelasRaw === '' ? null : parseInt(waliKelasRaw, 10);
             if (waliKelasRaw !== '' && (!Number.isFinite(waliKelas) || waliKelas <= 0)) {
-                showAlert('error', 'Wali kelas tidak valid.');
+                showAlert('error', 'nama mandor tidak valid.');
                 return null;
             }
 
             const kapasitas = kapasitasRaw === '' ? null : parseInt(kapasitasRaw, 10);
             if (kapasitasRaw !== '' && (!Number.isFinite(kapasitas) || kapasitas <= 0)) {
-                showAlert('error', 'Kapasitas harus berupa angka lebih dari 0.');
+                showAlert('error', 'Jumlah Kapasitas Karyawan per Gedung  harus berupa angka lebih dari 0.');
                 return null;
             }
 
@@ -654,7 +654,7 @@
 
                 closeModal();
                 await loadKelasData();
-                showAlert('success', res.message || (isEdit ? 'Kelas diperbarui.' : 'Kelas ditambahkan.'));
+                showAlert('success', res.message || (isEdit ? 'Gedung - Lantai diperbarui.' : 'Gedung - Lantai ditambahkan.'));
             } catch (err) {
                 showAlert('error', err.message || String(err));
             } finally {
@@ -670,7 +670,7 @@
             try {
                 const res = await apiRequest(getDestroyUrl(id), { method: 'DELETE' });
                 await loadKelasData();
-                showAlert('success', res.message || 'Kelas dihapus.');
+                showAlert('success', res.message || 'Gedung - Lantai dihapus.');
             } catch (err) {
                 showAlert('error', err.message || String(err));
             }
@@ -691,7 +691,7 @@
             }
 
             if (!kelas) {
-                showAlert('info', 'Data kelas tidak ditemukan.');
+                showAlert('info', 'Data Gedung - Lantai tidak ditemukan.');
                 return;
             }
 
@@ -709,13 +709,13 @@
             }
 
             if (!kelas || !kelas.id) {
-                showAlert('info', 'Data kelas tidak ditemukan.');
+                showAlert('info', 'Data Gedung - Lantai tidak ditemukan.');
                 return;
             }
 
             Swal.fire({
-                title: 'Hapus kelas?',
-                html: `Kelas <b>${escapeHtml(kelas.nama)}</b> akan dihapus.`,
+                title: 'Hapus Gedung - Lantai?',
+                html: `Gedung - Lantai <b>${escapeHtml(kelas.nama)}</b> akan dihapus.`,
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#dc2626',
@@ -760,7 +760,7 @@
 
         function handleFileImportKelas(input) {
             if (!input || !input.files || !input.files[0]) return;
-            showAlert('info', 'Import kelas belum diaktifkan pada versi ini.');
+            showAlert('info', 'Import Gedung - Lantai belum diaktifkan pada versi ini.');
             input.value = '';
         }
 

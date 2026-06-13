@@ -478,7 +478,7 @@
                         <div>
                             <label class="block text-[11px] font-bold text-gray-700 mb-1">Karyawan</label>
                             <div class="relative">
-                                <input id="riwayatSiswaSearch" type="text" autocomplete="off" placeholder="Ketik nama atau NISN, lalu pilih karyawan" value="${escapeHtml(siswaSearchValue)}" class="w-full bg-gray-50 border border-gray-200 text-gray-700 text-xs rounded-lg p-2.5">
+                                <input id="riwayatSiswaSearch" type="text" autocomplete="off" placeholder="Ketik nama atau NIK, lalu pilih karyawan" value="${escapeHtml(siswaSearchValue)}" class="w-full bg-gray-50 border border-gray-200 text-gray-700 text-xs rounded-lg p-2.5">
                                 <input id="riwayatSiswaId" type="hidden" name="siswa_id" value="${selectedSiswaId > 0 ? selectedSiswaId : ''}">
                                 <div id="riwayatSiswaDropdown" class="hidden absolute top-full left-0 right-0 mt-1 max-h-60 overflow-y-auto bg-white border border-gray-200 rounded-lg shadow-lg z-20"></div>
                             </div>
