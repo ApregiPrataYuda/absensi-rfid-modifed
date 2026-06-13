@@ -18,11 +18,11 @@ class RolePermissionController extends Controller
     protected array $protectedRoles = [
         'super-admin',
         'admin',
-        'bendahara',
-        'kepsek',
-        'wakasek',
+        // 'bendahara',
+        // 'kepsek',
+        // 'wakasek',
         'wakel',
-        'piket',
+        // 'piket',
         'siswa',
     ];
 
@@ -32,6 +32,17 @@ class RolePermissionController extends Controller
         'kepsek',
         'wakasek',
     ];
+
+    // KODE BARU UNTUK MANIPULASI PENAMAAN DI DEPAN
+    protected array $roleLabels = [
+    'super-admin' => 'Super Admin (IT)',
+    'admin'       => 'Admin',
+    'wakel'       => 'Mandor',
+    'siswa'       => 'Karyawan',
+    'bendahara'   => 'Bendahara',
+    'kepsek'      => 'Kepala',
+    'wakasek'     => 'Wakil Kepala',
+];
 
     public function usersIndex(): View
     {
@@ -116,6 +127,7 @@ class RolePermissionController extends Controller
             'roles' => $roles,
             'permissions' => $permissions,
             'protectedRoles' => $this->protectedRoles,
+             'roleLabels' => $this->roleLabels,
         ]);
     }
 
@@ -157,7 +169,8 @@ class RolePermissionController extends Controller
         $role->syncPermissions($allowedPermissions);
         app(PermissionRegistrar::class)->forgetCachedPermissions();
 
-        return $this->successResponse($request, 'Permission role "' . $role->name . '" berhasil diperbarui.');
+        // return $this->successResponse($request, 'Permission role "' . $role->name . '" berhasil diperbarui.'); KODE LAMA
+        return $this->successResponse($request, 'Permission role  berhasil diperbarui.');
     }
 
     public function destroyRole(Request $request, Role $role): RedirectResponse|JsonResponse
@@ -222,7 +235,8 @@ class RolePermissionController extends Controller
         ]);
         $user->syncRoles([$managedRole]);
 
-        return $this->successResponse($request, 'User ' . $managedRole . ' berhasil ditambahkan.');
+        // return $this->successResponse($request, 'User ' . $managedRole . ' berhasil ditambahkan.'); KODE LAMA
+        return $this->successResponse($request, 'User berhasil ditambahkan.');
     }
 
     public function updateAdminUser(Request $request, User $user): RedirectResponse|JsonResponse

@@ -33,9 +33,9 @@ class AuthenticatedSessionController extends Controller
         $siswa = Siswa::query()->where('nisn', $nisn)->first();
         if (! $siswa) {
             return response()->json([
-                'message' => 'NISN tidak ditemukan.',
+                'message' => 'NIK tidak ditemukan.',
                 'errors' => [
-                    'nisn' => ['NISN tidak ditemukan.'],
+                    'nisn' => ['NIK tidak ditemukan.'],
                 ],
             ], 422);
         }

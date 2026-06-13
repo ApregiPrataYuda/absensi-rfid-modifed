@@ -199,11 +199,11 @@ class DatabaseSeeder extends Seeder
         $this->call(DefaultRoleAccountsSeeder::class);
 
         $configs = [
-            ['key' => 'jam_masuk_mulai', 'value' => '06:00', 'keterangan' => 'Waktu absen datang dibuka'],
-            ['key' => 'jam_masuk_akhir', 'value' => '07:00', 'keterangan' => 'Batas waktu terlambat'],
-            ['key' => 'jam_masuk_telat', 'value' => '07:30', 'keterangan' => 'Batas akhir absen masuk'],
-            ['key' => 'jam_pulang_mulai', 'value' => '11:30', 'keterangan' => 'Waktu absen pulang dibuka'],
-            ['key' => 'jam_pulang_akhir', 'value' => '12:00', 'keterangan' => 'Batas akhir absen pulang'],
+            ['key' => 'jam_masuk_mulai', 'value' => '08:00', 'keterangan' => 'Waktu absen datang dibuka'],
+            ['key' => 'jam_masuk_akhir', 'value' => '08:30', 'keterangan' => 'Batas waktu terlambat'],
+            ['key' => 'jam_masuk_telat', 'value' => '09:00', 'keterangan' => 'Batas akhir absen masuk'],
+            ['key' => 'jam_pulang_mulai', 'value' => '17:00', 'keterangan' => 'Waktu absen pulang dibuka'],
+            ['key' => 'jam_pulang_akhir', 'value' => '17:30', 'keterangan' => 'Batas akhir absen pulang'],
         ];
 
         foreach ($configs as $config) {

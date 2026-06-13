@@ -2073,7 +2073,7 @@ function updateRekapBulananPagination(total, startIdx, currentCount) {
         : Math.max(1, Math.ceil(total / rekapBulananState.limit));
 
     if (total === 0) {
-        infoEl.textContent = 'Tidak ada data siswa.';
+        infoEl.textContent = 'Tidak ada data karyawan.';
         btnPrev.disabled = true;
         btnNext.disabled = true;
         return;
@@ -2093,7 +2093,7 @@ function renderRekapBulananPage() {
     const total = students.length;
 
     if (total === 0) {
-        tbody.innerHTML = '<tr><td colspan="100%" class="p-8 text-center text-gray-400">Tidak ada data siswa.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="100%" class="p-8 text-center text-gray-400">Tidak ada data karyawan.</td></tr>';
         updateRekapBulananPagination(0, 0, 0);
         return;
     }
@@ -2249,7 +2249,7 @@ function loadDataRekapBulanan() {
         
         // 1. RENDER HEADER
         let headerHTML = '<th class="p-3 w-10 text-center bg-gray-100 sticky left-0 z-20">No</th>';
-        headerHTML += '<th class="p-3 w-40 bg-gray-100 sticky left-10 z-20">Nama Siswa</th>';
+        headerHTML += '<th class="p-3 w-40 bg-gray-100 sticky left-10 z-20">Nama Karyawan</th>';
         
         // Loop tanggal 1 s.d akhir bulan
         for(let d=1; d<=data.daysInMonth; d++) {
@@ -2288,7 +2288,7 @@ function renderRekapTable(result) {
     // --- 1. GENERATE HEADER ---
     let headerHtml = `
         <th class="p-3 w-10 sticky left-0 bg-gray-100 z-20 border-r border-gray-200">No</th>
-        <th class="p-3 w-64 sticky left-10 bg-gray-100 z-20 border-r border-gray-200 shadow-sm">Nama Siswa</th>
+        <th class="p-3 w-64 sticky left-10 bg-gray-100 z-20 border-r border-gray-200 shadow-sm">Nama Karyawan</th>
     `;
     
     // Ambil info libur dari siswa pertama (karena pola libur sama untuk semua)
@@ -2322,7 +2322,7 @@ function renderRekapTable(result) {
 
     // --- 2. GENERATE BODY ---
     if (students.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="100%" class="p-8 text-center text-gray-400">Tidak ada data siswa.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="100%" class="p-8 text-center text-gray-400">Tidak ada data karyawan.</td></tr>';
         return;
     }
 
@@ -2445,17 +2445,17 @@ function loadSiswaUntukPromosi() {
     const tujuan = document.getElementById('promoKelasTujuan').value;
 
     if (!asal || !tujuan) {
-        showAlert('error', 'Harap pilih Kelas Asal dan Kelas Tujuan.');
+        showAlert('error', 'Harap pilih Gedung Asal dan Gedung Tujuan.');
         return;
     }
 
     if (asal === tujuan) {
-        showAlert('error', 'Kelas Asal dan Tujuan tidak boleh sama.');
+        showAlert('error', 'Gedung Asal dan Tujuan tidak boleh sama.');
         return;
     }
 
     showLoading(); // Overlay loading (buat function ini jika belum ada) atau manual:
-    document.getElementById('tbody-promo-siswa').innerHTML = '<tr><td colspan="4" class="p-4 text-center"><i class="fas fa-circle-notch fa-spin"></i> Mengambil data siswa...</td></tr>';
+    document.getElementById('tbody-promo-siswa').innerHTML = '<tr><td colspan="4" class="p-4 text-center"><i class="fas fa-circle-notch fa-spin"></i> Mengambil data karyawan...</td></tr>';
     document.getElementById('container-promo-siswa').classList.remove('hidden');
     document.getElementById('promo-placeholder').classList.add('hidden');
 
@@ -2866,7 +2866,7 @@ async function downloadKartuSiswaBulk() {
     }
 
     if (dataToPrint.length === 0) {
-        showAlert('error', 'Tidak ada siswa ditemukan.');
+        showAlert('error', 'Tidak ada karyawan ditemukan.');
         return;
     }
 

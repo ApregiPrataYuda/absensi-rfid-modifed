@@ -50,7 +50,7 @@
               <thead class="bg-gray-50 text-gray-500 text-[10px] uppercase font-semibold border-b border-gray-200">
                   <tr>
                       <th class="p-3 text-center w-12">No</th>
-                      <th class="p-3">Nama Gedung - Lantai</th>
+                      <th class="p-3">Nama Lokasi - Gedung - Lantai</th>
                       <th class="p-3 hidden md:table-cell">Mandor (Pengelola)</th>
                       <th class="p-3 hidden sm:table-cell">Kapasitas</th>
                       <th class="p-3 hidden md:table-cell">Jumlah Karyawan</th>

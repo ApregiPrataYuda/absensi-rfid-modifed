@@ -9,7 +9,7 @@
         <div class="p-4 border-b border-gray-100 flex flex-col md:flex-row justify-between items-center gap-4 bg-indigo-50/30">
             <div>
                 <h3 class="font-bold text-gray-800">Rekapitulasi Bulanan</h3>
-                <p class="text-xs text-gray-500">Matriks kehadiran siswa bulan berjalan</p>
+                <p class="text-xs text-gray-500">Matriks kehadiran karyawan bulan berjalan</p>
             </div>
 
             <div class="flex flex-wrap items-center gap-2 justify-end w-full md:w-auto">
@@ -21,7 +21,7 @@
 
                 <select id="rekapKelas" class="bg-white border border-gray-200 text-gray-700 text-xs rounded-lg p-2 font-bold focus:ring-indigo-500 shadow-sm cursor-pointer w-full md:w-auto">
                     @if (!auth()->user()?->hasRole('wakel'))
-                        <option value="">Semua Kelas</option>
+                        <option value="">Semua Lokasi Gedung - Lantai</option>
                     @endif
                 </select>
 
@@ -94,8 +94,8 @@
                             <span>Jumlah total hari dalam bulan berjalan yang <b>sudah berlalu</b> dikurangi Hari Minggu dan Hari Libur Nasional. Hari masa depan (besok dst) tidak dihitung.</span>
                         </li>
                         <li class="flex gap-2">
-                            <span class="font-bold text-indigo-600 w-24 shrink-0">Status Alpha :</span>
-                            <span>Siswa dianggap Alpha jika hari tersebut adalah <b>Hari Efektif</b> (sekolah masuk) namun siswa tidak melakukan scan kehadiran.</span>
+                            <span class="font-bold text-indigo-600 w-24 shrink-0">Status Tanpa Keterangan (Alpha) :</span>
+                            <span>Karyawan dianggap tidak hadir jika hari tersebut adalah <b>Hari Efektif</b> (hari masuk kerja) namun karyawan tidak melakukan scan absensi.</span>
                         </li>
                     </ul>
                 </div>

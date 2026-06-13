@@ -150,7 +150,9 @@
 
     <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
         <article class="bg-white rounded-xl border border-gray-100 p-3.5 md:p-4 shadow-sm">
-            <p class="text-[11px] uppercase tracking-wide text-gray-500 font-semibold">Total Karyawan Gedung</p>
+            <p class="text-[11px] uppercase tracking-wide text-gray-500 font-semibold">Total Karyawan 
+
+</p>
             <p id="studentClassTotal" class="mt-2 text-xl md:text-2xl font-bold text-gray-800">0</p>
         </article>
         <article class="bg-white rounded-xl border border-emerald-100 p-3.5 md:p-4 shadow-sm">
@@ -162,7 +164,7 @@
             <p id="studentClassIzinSakit" class="mt-2 text-xl md:text-2xl font-bold text-blue-700">0</p>
         </article>
         <article class="bg-white rounded-xl border border-amber-100 p-3.5 md:p-4 shadow-sm">
-            <p class="text-[11px] uppercase tracking-wide text-amber-700 font-semibold">Belum/Alpa</p>
+            <p class="text-[11px] uppercase tracking-wide text-amber-700 font-semibold">Belum/Alpa (Tanpa Keterangan)</p>
             <p id="studentClassNeedAction" class="mt-2 text-xl md:text-2xl font-bold text-amber-700">0</p>
         </article>
     </div>

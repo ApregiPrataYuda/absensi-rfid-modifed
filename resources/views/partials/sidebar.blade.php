@@ -1,6 +1,6 @@
        @php
-           $brandName = $appUiSettings['website_nama'] ?? 'E-ABSENSI';
-           $brandSlogan = $appUiSettings['website_slogan'] ?? 'Smart Attendance system';
+           $brandName = $appUiSettings['website_nama'] ?? 'RFID-ABSENSI';
+           $brandSlogan = $appUiSettings['website_slogan'] ?? 'Smart Attendance ystem';
            $brandLogoUrl = $appUiSettings['website_logo_url'] ?? null;
            $sidebarUser = auth()->user();
            $sidebarAvatarUrl = null;
@@ -24,7 +24,8 @@
                   </div>
                   <div class="sidebar-label transition-opacity duration-300 whitespace-nowrap">
                       <h1 id="sidebarBrandName" class="font-bold text-base tracking-wide text-white">{{ $brandName }}</h1>
-                      <p id="sidebarBrandSlogan" class="text-[9px] text-indigo-100 uppercase tracking-wider font-semibold">{{ $brandSlogan }}</p>
+                      {{-- <p id="sidebarBrandSlogan" class="text-[9px] text-indigo-100 uppercase tracking-wider font-semibold">{{ $brandSlogan }}</p> --}}
+                      <p id="sidebarBrandSlogan" class="text-[9px] text-indigo-100 uppercase tracking-wider font-semibold">Smart Attendance System</p>
                   </div>
               </div>
           </div>
@@ -57,14 +58,14 @@
                           
                         <summary class="list-none flex items-center gap-3 px-3 py-2.5 rounded-lg transition text-gray-300 hover:bg-white/10 hover:text-white cursor-pointer">
                               <i class="fas fa-users w-4 text-center"></i>
-                              <span class="sidebar-label text-[15px] font-semibold flex-1">Kelola Member</span>
+                              <span class="sidebar-label text-[15px] font-semibold flex-1">Data Master</span>
                               <i class="fas fa-chevron-right settings-chevron sidebar-label text-[11px] opacity-80"></i>
                           </summary>
                           <div class="mt-2 pl-2 space-y-2">
 
                               @can('siswa.view')
                                   <a href="{{ route('data-siswa') }}" class="flex items-center gap-2 px-3 py-2 rounded-lg transition {{ request()->routeIs('data-siswa') ? 'bg-white/15 text-white' : 'text-gray-300 hover:bg-white/10 hover:text-white' }}">
-                                      <i class="fas fa-person-digging w-4 text-center"></i>
+                                      <i class="fas fa-building-user w-4 text-center"></i>
                                       <span class="sidebar-label text-[14px] font-medium">Data Karyawan</span>
                                   </a>
                               @endcan

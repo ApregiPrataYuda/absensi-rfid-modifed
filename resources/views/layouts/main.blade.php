@@ -173,7 +173,7 @@
         window.APP_CURRENT_USER = {!! json_encode($appCurrentUser) !!};
         window.APP_TIMEZONE = @json($appUiSettings['website_timezone'] ?? config('app.timezone', 'Asia/Jakarta'));
         window.APP_TIMEZONE_LABEL = @json($appUiSettings['website_timezone_label'] ?? 'WIB (UTC+07:00)');
-        window.APP_WEBSITE_NAME = @json($appUiSettings['website_nama'] ?? 'ABSENSINDO');
+        window.APP_WEBSITE_NAME = @json($appUiSettings['website_nama'] ?? 'RFIDABSENSI');
         window.APP_API_BASE = @json(rtrim(request()->getBaseUrl(), '/') . '/api');
         window.APP_AJAX_ACTIONS = {!! json_encode($ajaxActionEndpoints) !!};
 

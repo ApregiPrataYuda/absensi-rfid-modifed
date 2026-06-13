@@ -1,14 +1,14 @@
 @extends('layouts.page')
 
-@section('title', 'Dashboard Guru')
+@section('title', 'Dashboard Mandor')
 
 @section('content')
 <div id="view-guru-dashboard" class="view-section active animate-fade-in">
                   
                   <div class="flex flex-col md:flex-row justify-between items-end mb-8 gap-4">
                       <div>
-                           <h2 class="text-2xl font-bold text-gray-800 tracking-tight">Dashboard Guru</h2>
-                           <p class="text-sm text-gray-500 mt-1">Ringkasan aktivitas siswa hari ini.</p>
+                           <h2 class="text-2xl font-bold text-gray-800 tracking-tight">Dashboard Mandor</h2>
+                           <p class="text-sm text-gray-500 mt-1">Ringkasan aktivitas Karyawan hari ini.</p>
                       </div>
                       <div class="flex items-center gap-3">
                           <span class="text-xs font-bold bg-indigo-50 text-indigo-700 px-3 py-1.5 rounded-lg border border-indigo-100">
@@ -23,7 +23,7 @@
                   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
                       <div class="bg-white p-5 rounded-xl shadow-sm border border-indigo-100 flex flex-col justify-between relative overflow-hidden group">
                           <div class="absolute right-0 top-0 w-16 h-16 bg-indigo-50 rounded-bl-full -mr-2 -mt-2 transition-transform group-hover:scale-110"></div>
-                          <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest relative z-10">Total Siswa</p>
+                          <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest relative z-10">Total Karyawan</p>
                           <div class="flex items-center justify-between mt-2 relative z-10">
                               <h3 id="statGuruTotal" class="text-2xl font-bold text-gray-800">-</h3>
                               <div class="text-indigo-500 bg-indigo-50 p-2 rounded-lg"><i class="fas fa-user-graduate"></i></div>
@@ -59,7 +59,7 @@
 
                       <div class="bg-white p-5 rounded-xl shadow-sm border border-red-100 flex flex-col justify-between relative overflow-hidden group">
                           <div class="absolute right-0 top-0 w-16 h-16 bg-red-50 rounded-bl-full -mr-2 -mt-2 transition-transform group-hover:scale-110"></div>
-                          <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest relative z-10">Alpa</p>
+                          <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest relative z-10">Alpa (Tanpa Keterangan)</p>
                           <div class="flex items-center justify-between mt-2 relative z-10">
                               <h3 id="statGuruAlpa" class="text-2xl font-bold text-gray-800">-</h3>
                               <div class="text-red-500 bg-red-50 p-2 rounded-lg"><i class="fas fa-times-circle"></i></div>

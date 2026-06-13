@@ -46,7 +46,7 @@ class AttendanceRecordService extends BaseActionService
         if ($role === 'wakel') {
             $wakelKelas = $this->getWakelKelasFromAuth($auth);
             if ($wakelKelas === null) {
-                return ['success' => false, 'message' => 'Akun wali kelas belum ditautkan ke kelas.'];
+                return ['success' => false, 'message' => 'Akun Mandor belum ditautkan ke lokasi gedung.'];
             }
 
             $filterKelas = $wakelKelas;
@@ -174,7 +174,7 @@ class AttendanceRecordService extends BaseActionService
         if ($role === 'wakel') {
             $wakelKelas = $this->getWakelKelasFromAuth($auth);
             if ($wakelKelas === null) {
-                return ['success' => false, 'message' => 'Akun wali kelas belum ditautkan ke kelas.'];
+                return ['success' => false, 'message' => 'Akun Mandor belum ditautkan ke lokasi gedung.'];
             }
 
             $kelas = $wakelKelas;
@@ -283,7 +283,7 @@ class AttendanceRecordService extends BaseActionService
 
         $wakelKelas = $role === 'wakel' ? $this->getWakelKelasFromAuth($auth) : null;
         if ($role === 'wakel' && $wakelKelas === null) {
-            return ['success' => false, 'message' => 'Akun wali kelas belum ditautkan ke kelas.'];
+            return ['success' => false, 'message' => 'Akun Mandor belum ditautkan ke lokasi gedung.'];
         }
 
         $piketKelas = $role === 'piket' ? $this->getPiketKelasFromAuth($auth) : null;
@@ -355,7 +355,7 @@ class AttendanceRecordService extends BaseActionService
 
         $wakelKelas = $role === 'wakel' ? $this->getWakelKelasFromAuth($auth) : null;
         if ($role === 'wakel' && $wakelKelas === null) {
-            return ['success' => false, 'message' => 'Akun wali kelas belum ditautkan ke kelas.'];
+            return ['success' => false, 'message' => 'Akun Mandor belum ditautkan ke lokasi gedung.'];
         }
 
         $piketKelas = $role === 'piket' ? $this->getPiketKelasFromAuth($auth) : null;

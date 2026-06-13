@@ -10,11 +10,11 @@
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
                 <div>
                     <h3 class="font-bold text-lg text-gray-800">Laporan Absensi</h3>
-                    <p class="text-xs text-gray-500">Rekap data absensi siswa berdasarkan periode.</p>
+                    <p class="text-xs text-gray-500">Rekap data absensi karyawan berdasarkan periode.</p>
                 </div>
                 <div class="flex flex-wrap items-center gap-2 w-full md:w-auto justify-end">
                     <select id="fKelasRekap" onchange="handleRekapAbsensiHeaderFilterChange()" class="bg-white border border-gray-200 text-gray-700 text-xs rounded-lg p-2.5 font-bold focus:ring-indigo-500 focus:border-indigo-500 shadow-sm cursor-pointer w-full md:w-auto">
-                        <option value="">Semua Kelas</option>
+                        <option value="">Semua Gedung</option>
                     </select>
                     <select id="rekapAbsensiBulan" onchange="handleRekapAbsensiHeaderFilterChange()" class="bg-white border border-gray-200 text-gray-700 text-xs rounded-lg p-2.5 font-bold focus:ring-indigo-500 focus:border-indigo-500 shadow-sm cursor-pointer w-full md:w-auto">
                         <option value="1">Januari</option>
@@ -35,7 +35,7 @@
                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                             <i class="fas fa-search text-gray-400 text-xs"></i>
                         </div>
-                        <input type="text" oninput="handleTableSearch('rekap', this.value)" class="bg-white border border-gray-200 text-gray-900 text-xs rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 p-2.5" placeholder="Cari Siswa / Kelas...">
+                        <input type="text" oninput="handleTableSearch('rekap', this.value)" class="bg-white border border-gray-200 text-gray-900 text-xs rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 p-2.5" placeholder="Cari Karyawan / Gedung...">
                     </div>
                     <button onclick="exportToExcel()" id="btnExportExcel" class="bg-emerald-600 text-white px-5 py-2.5 rounded-lg font-bold text-xs shadow-md hover:bg-emerald-700 transition transform active:scale-95 flex items-center justify-center gap-2">
                         <i class="fas fa-file-excel"></i> Export Excel
@@ -60,8 +60,8 @@
                       <tr>
                           <th class="p-4 text-center w-10">No</th>
                           <th class="p-4">Tanggal</th>
-                          <th class="p-4">Nama Siswa</th>
-                          <th class="p-4 text-center">Kelas</th>
+                          <th class="p-4">Nama Karyawan</th>
+                          <th class="p-4 text-center">Gedung - Lantai</th>
                           <th class="p-4 text-center">Jam Datang</th>
                           <th class="p-4 text-center">Jam Pulang</th>
                           

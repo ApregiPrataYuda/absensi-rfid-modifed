@@ -60,7 +60,7 @@
 
                       <div class="bg-white p-5 rounded-xl shadow-sm border border-red-100 flex flex-col justify-between relative overflow-hidden group">
                           <div class="absolute right-0 top-0 w-16 h-16 bg-red-50 rounded-bl-full -mr-2 -mt-2 transition-transform group-hover:scale-110"></div>
-                          <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest relative z-10">Alpa</p>
+                          <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest relative z-10">Alpa (Tanpa Keterangan)</p>
                           <div class="flex items-center justify-between mt-2 relative z-10">
                               <h3 id="admStatAlpa" class="text-2xl font-bold text-gray-800">-</h3>
                               <div class="text-red-500 bg-red-50 p-2 rounded-lg"><i class="fas fa-times"></i></div>
@@ -111,13 +111,7 @@
                                       </div>
                                   </a>
                                   
-                                  <a href="{{ route('kelola-absen') }}" class="w-full flex items-center p-3 rounded-xl border border-gray-100 hover:bg-rose-50 hover:border-rose-200 transition-all group text-left">
-                                      <div class="w-10 h-10 rounded-lg bg-rose-100 text-rose-600 flex items-center justify-center mr-3 group-hover:scale-110 transition"><i class="fas fa-calendar-times"></i></div>
-                                      <div>
-                                          <div class="font-bold text-xs text-gray-700">Hari Libur</div>
-                                          <div class="text-[10px] text-gray-400">Setting tanggal merah</div>
-                                      </div>
-                                  </a>
+                                  
                               </div>
                           </div>
                       </div>

@@ -123,7 +123,7 @@ class ReportExportService extends LessonWorkflowService
         if ($role === 'wakel' && $type !== 'laporan_absensi_pelajaran') {
             $wakelKelas = $this->getWakelKelasFromAuth($auth);
             if ($wakelKelas === null) {
-                return response()->json(['success' => false, 'message' => 'Akun wali kelas belum ditautkan ke kelas.'], 422);
+                return response()->json(['success' => false, 'message' => 'Akun mandor belum ditautkan ke lokasi gedung.'], 422);
             }
 
             $filters['kelas'] = $wakelKelas;
@@ -156,7 +156,7 @@ class ReportExportService extends LessonWorkflowService
             $filenameBase = 'rekap_bulan_' . $bulanLabel . '_' . $tahun;
             $kelas = $this->normalizeKelasValue($filters['kelas'] ?? null);
             if ($kelas !== null) {
-                $filenameBase .= '_kelas_' . $this->toFilenameSlug($kelas);
+                $filenameBase .= '_lokasi_' . $this->toFilenameSlug($kelas);
             }
 
             $filename = $filenameBase . '_' . now()->format('Ymd_His') . '.xlsx';
@@ -170,7 +170,7 @@ class ReportExportService extends LessonWorkflowService
                 return response()->json(['success' => false, 'message' => 'Pilih kelas terlebih dahulu untuk export rekap tahunan.'], 422);
             }
 
-            $filename = 'rekap_tahunan_' . $tahun . '_kelas_' . $this->toFilenameSlug($kelas) . '_' . now()->format('Ymd_His') . '.xlsx';
+            $filename = 'rekap_tahunan_' . $tahun . '_lokasi_' . $this->toFilenameSlug($kelas) . '_' . now()->format('Ymd_His') . '.xlsx';
             $binary = $this->buildRekapTahunanXlsxBinary($tahun, $kelas);
         } elseif ($type === 'monitoring') {
             $rows = $this->buildLaporanAbsensiRows($filters);
@@ -178,20 +178,22 @@ class ReportExportService extends LessonWorkflowService
             $dateSegment = $this->buildExportDateSegmentFromFilters($filters);
             $filenameBase = 'monitoring_harian_' . $dateSegment;
             if ($kelas !== null) {
-                $filenameBase .= '_kelas_' . $this->toFilenameSlug($kelas);
+                $filenameBase .= '_lokasi_' . $this->toFilenameSlug($kelas);
             }
             $filename = $filenameBase . '_' . now()->format('His') . '.xlsx';
-            $binary = $this->buildMonitoringXlsxBinary($rows, $filters);
+            // $binary = $this->buildMonitoringXlsxBinary($rows, $filters);
+            $binary = $this->buildMonitoringXlsxBinary($rows, $filters, 'MONITORING KEHADIRAN KARYAWAN');
+
         } elseif ($type === 'laporan_absensi') {
             $rows = $this->buildLaporanAbsensiRows($filters);
             $kelas = $this->normalizeKelasValue($filters['kelas'] ?? null);
             $dateSegment = $this->buildExportDateSegmentFromFilters($filters);
             $filenameBase = 'laporan_absensi_' . $dateSegment;
             if ($kelas !== null) {
-                $filenameBase .= '_kelas_' . $this->toFilenameSlug($kelas);
+                $filenameBase .= '_lokasi_' . $this->toFilenameSlug($kelas);
             }
             $filename = $filenameBase . '_' . now()->format('His') . '.xlsx';
-            $binary = $this->buildMonitoringXlsxBinary($rows, $filters, 'LAPORAN KEHADIRAN SISWA');
+            $binary = $this->buildMonitoringXlsxBinary($rows, $filters, 'LAPORAN KEHADIRAN KARYAWAN');
         } elseif ($type === 'laporan_absensi_pelajaran') {
             $reportResult = $this->getPelajaranReportData([$filters], $auth);
             if (!($reportResult['success'] ?? false)) {
@@ -292,7 +294,7 @@ class ReportExportService extends LessonWorkflowService
             ->keyBy(fn ($row) => $row->tanggal->format('Y-m-d') . '_' . $row->nisn);
 
         $rows = [[
-            'No', 'Tanggal', 'NISN', 'Nama Siswa', 'Kelas',
+            'No', 'Tanggal', 'NIK', 'Nama Karyawan', 'Lokasi Gedung - Lantai',
             'Jam Datang', 'Jam Pulang', 'Keterangan', 'Status'
         ]];
 
@@ -484,10 +486,10 @@ class ReportExportService extends LessonWorkflowService
         }
 
         $groupedByClass = $siswaList->groupBy(function (Siswa $siswa) {
-            return $this->normalizeKelasValue($siswa->kelas) ?? 'Tanpa Kelas';
+            return $this->normalizeKelasValue($siswa->kelas) ?? 'Tanpa Lokasi';
         });
         if ($groupedByClass->isEmpty()) {
-            $groupedByClass = collect([($kelas ?? 'Tanpa Kelas') => collect()]);
+            $groupedByClass = collect([($kelas ?? 'Tanpa Lokasi') => collect()]);
         }
 
         $rows = [];
@@ -499,17 +501,17 @@ class ReportExportService extends LessonWorkflowService
             $groupCursor++;
             $kelasText = strtoupper(trim((string) $kelasName));
             if ($kelasText === '') {
-                $kelasText = 'TANPA KELAS';
+                $kelasText = 'TANPA Lokasi';
             }
 
             $titleRow = count($rows) + 1;
-            $rows[] = $padRow(['ABSENSI SISWA - KELAS ' . $kelasText]);
+            $rows[] = $padRow(['ABSENSI KARYAWAN - LOKASI GEDUNG ' . $kelasText]);
 
             $subtitleRow = count($rows) + 1;
             $rows[] = $padRow(['BULAN : ' . $bulanLabel . ' ' . $tahun]);
 
             $groupHeaderRow = count($rows) + 1;
-            $groupHeader = ['NO', 'NIS', 'NAMA SISWA', 'TANGGAL'];
+            $groupHeader = ['NO', 'NIK', 'NAMA KARYAWAN', 'TANGGAL'];
             for ($d = 2; $d <= $dayColumns; $d++) {
                 $groupHeader[] = '';
             }
@@ -597,7 +599,7 @@ class ReportExportService extends LessonWorkflowService
 
             $dataEndRow = count($rows);
             if ($dataEndRow < $dataStartRow) {
-                $rows[] = $padRow(['', '', 'Tidak ada data siswa']);
+                $rows[] = $padRow(['', '', 'Tidak ada data karyawan']);
                 $dataEndRow = count($rows);
             }
 
@@ -1135,7 +1137,7 @@ class ReportExportService extends LessonWorkflowService
             $blockRows[3][max(0, $totalColumns - 3)] = 'S';
             $blockRows[3][max(0, $totalColumns - 2)] = 'I';
             $blockRows[3][max(0, $totalColumns - 1)] = 'A';
-            $blockRows[4][2] = 'Tidak ada data siswa';
+            $blockRows[4][2] = 'Tidak ada data karyawan';
         }
 
         foreach ($blockRows as $idx => $row) {
@@ -1611,7 +1613,7 @@ class ReportExportService extends LessonWorkflowService
     {
         if (empty($rows)) {
             $rows = [[
-                'No', 'Tanggal', 'NISN', 'Nama Siswa', 'Kelas',
+                'No', 'Tanggal', 'NIK', 'Nama Karyawan', 'Lokasi',
                 'Jam Datang', 'Jam Pulang', 'Keterangan', 'Status',
             ]];
         }
@@ -1619,7 +1621,7 @@ class ReportExportService extends LessonWorkflowService
         $header = is_array($rows[0] ?? null) ? array_values($rows[0]) : [];
         if (empty($header)) {
             $header = [
-                'No', 'Tanggal', 'NISN', 'Nama Siswa', 'Kelas',
+                'No', 'Tanggal', 'NIK', 'Nama Karyawan', 'Lokasi',
                 'Jam Datang', 'Jam Pulang', 'Keterangan', 'Status',
             ];
         }
@@ -1654,9 +1656,9 @@ class ReportExportService extends LessonWorkflowService
             $dateLabel = $startDate . ($endDate !== $startDate ? ' s/d ' . $endDate : '');
         }
         $selectedKelas = $this->normalizeKelasValue($filters['kelas'] ?? null);
-        $kelasColumnIndex = array_search('Kelas', $normalizedHeader, true);
+        $kelasColumnIndex = array_search('Lokasi Gedung', $normalizedHeader, true);
         $noColumnIndex = array_search('No', $normalizedHeader, true);
-        $nameColumnIndex = array_search('Nama Siswa', $normalizedHeader, true);
+        $nameColumnIndex = array_search('Nama Karyawan', $normalizedHeader, true);
         $statusColumnIndex = array_search('Status', $normalizedHeader, true);
         $keteranganColumnIndex = array_search('Keterangan', $normalizedHeader, true);
 
@@ -1665,9 +1667,9 @@ class ReportExportService extends LessonWorkflowService
             $groupedRows[$selectedKelas] = $normalizedDataRows;
         } else {
             foreach ($normalizedDataRows as $row) {
-                $kelasName = 'Tanpa Kelas';
+                $kelasName = 'Tanpa lokasi';
                 if ($kelasColumnIndex !== false) {
-                    $kelasName = $this->normalizeKelasValue($row[$kelasColumnIndex] ?? null) ?? 'Tanpa Kelas';
+                    $kelasName = $this->normalizeKelasValue($row[$kelasColumnIndex] ?? null) ?? 'Tanpa Lokasi';
                 }
                 if (!isset($groupedRows[$kelasName])) {
                     $groupedRows[$kelasName] = [];
@@ -1751,7 +1753,7 @@ class ReportExportService extends LessonWorkflowService
                 $dataEndRow = $dataStartRow + count($classRows) - 1;
 
                 $sheet->setCellValue("{$blockStartCol}{$titleRow}", $mainTitle);
-                $sheet->setCellValue("{$blockStartCol}{$subtitleRow}", 'Tanggal: ' . $dateLabel . ' | Kelas: ' . $kelasLabel);
+                $sheet->setCellValue("{$blockStartCol}{$subtitleRow}", 'Tanggal: ' . $dateLabel . ' | Lokasi: ' . $kelasLabel);
                 $sheet->mergeCells("{$blockStartCol}{$titleRow}:{$blockLastCol}{$titleRow}");
                 $sheet->mergeCells("{$blockStartCol}{$subtitleRow}:{$blockLastCol}{$subtitleRow}");
 

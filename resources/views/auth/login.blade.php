@@ -47,10 +47,10 @@
 
                     <div class="bg-slate-100 p-1.5 rounded-xl flex mb-6 border border-slate-200">
                         <button id="btnSiswaTab" onclick="switchLoginTab('siswa')" class="flex-1 py-2.5 text-sm font-bold rounded-lg shadow-sm bg-white text-indigo-700 ring-1 ring-black/5 transition-all duration-300 flex items-center justify-center gap-2">
-                            <i class="fas fa-user-tie"></i> Employee
+                            <i class="fas fa-user-tie"></i> Karyawan
                         </button>
                         <button id="btnAdminTab" onclick="switchLoginTab('admin')" class="flex-1 py-2.5 text-sm font-medium rounded-lg text-slate-500 hover:text-slate-700 hover:bg-white/50 transition-all duration-300 flex items-center justify-center gap-2">
-                            <i class="fas fa-chalkboard-teacher"></i> Administrator / Admin
+                            <i class="fas fa-chalkboard-teacher"></i> Admin / Mandor
                         </button>
                     </div>
 
@@ -82,7 +82,7 @@
 
                     <div id="loginFormsWrap" class="min-h-[176px] relative">
                         <div id="formSiswaLogin" class="animate-fade-in">
-                            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2 ml-1">NIK EMPLOYE</label>
+                            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2 ml-1">NIK KARYAWAN</label>
                             <div class="relative group">
                                 <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400 group-focus-within:text-indigo-600 transition-colors">
                                     <i class="far fa-id-card text-base"></i>

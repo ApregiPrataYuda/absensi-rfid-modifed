@@ -37,7 +37,8 @@
                             aria-selected="{{ $index === 0 ? 'true' : 'false' }}"
                             class="js-role-tab shrink-0 px-3 py-1.5 rounded-lg text-xs font-bold transition {{ $index === 0 ? 'bg-indigo-600 text-white' : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-100' }}"
                         >
-                            {{ strtoupper($role->name) }}
+                            {{-- {{ strtoupper($role->name) }} kode lama--}}
+                            {{ strtoupper($roleLabels[$role->name] ?? $role->name) }}
                         </button>
                     @endforeach
                 </div>
@@ -58,7 +59,11 @@
                     >
                         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-3">
                             <div>
-                                <h4 class="text-sm font-bold text-gray-800">{{ $role->name }}</h4>
+                                {{-- <h4 class="text-sm font-bold text-gray-800">{{ $role->name }}</h4> KODE LAMA--}}
+                                <h4 class="text-sm font-bold text-gray-800">
+                                    {{ $roleLabels[$role->name] ?? $role->name }}
+                                    <span class="text-xs text-gray-400 font-normal ml-1">({{ $role->name }})</span>
+                                </h4>
                                 <p class="text-xs text-gray-500">Pilih permission yang diizinkan untuk role ini.</p>
                             </div>
                             <div class="flex items-center gap-2">

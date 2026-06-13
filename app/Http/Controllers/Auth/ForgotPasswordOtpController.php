@@ -47,7 +47,7 @@ class ForgotPasswordOtpController extends Controller
             RateLimiter::hit($rateKey, self::OTP_REQUEST_DECAY_SECONDS);
             return response()->json([
                 'success' => false,
-                'message' => 'Username, email, atau NISN tidak ditemukan.',
+                'message' => 'Username, email, atau NIK tidak ditemukan.',
             ], 422);
         }
 

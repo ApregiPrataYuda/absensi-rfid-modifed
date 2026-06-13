@@ -16,7 +16,7 @@
                 <div class="flex flex-wrap items-center gap-2 justify-end w-full md:w-auto">
                     <select id="rekapKelas" class="bg-white border border-gray-200 text-gray-700 text-xs rounded-lg p-2 font-bold focus:ring-indigo-500 shadow-sm cursor-pointer w-full md:w-auto">
                         @if (!auth()->user()?->hasRole('wakel'))
-                            <option value="">Semua Kelas</option>
+                            <option value="">Semua Gedung</option>
                         @endif
                     </select>
 
@@ -115,7 +115,7 @@
         let kelas = String(sharedFilters.kelas || '').trim();
 
         if (!kelas) {
-            showAlert('error', 'Pilih kelas terlebih dahulu untuk export rekap tahunan.');
+            showAlert('error', 'Pilih Lokasi terlebih dahulu untuk export rekap tahunan.');
             return;
         }
 
